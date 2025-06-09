@@ -16,6 +16,7 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_clipboard_manager::init())
         .setup(|app| {
             let window = app.get_webview_window("main").unwrap();
 
@@ -36,6 +37,7 @@ pub fn run() {
             utilities::generators::generate_uuid_v7,
             utilities::generators::generate_ulid,
             utilities::generators::generate_nanoid,
+            utilities::formatters::format_json,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

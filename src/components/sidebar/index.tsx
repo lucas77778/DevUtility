@@ -348,10 +348,7 @@ export default function AppSidebar({
                     const href = `/${category.url}/${util.url}`;
                     return (
                       <SidebarMenuItem key={util.title}>
-                        <SidebarMenuButton
-                          asChild
-                          isActive={pathname === href}
-                        >
+                        <SidebarMenuButton asChild isActive={pathname === href}>
                           <Link
                             href={href}
                             className="flex items-center gap-2 truncate"
@@ -376,12 +373,15 @@ export default function AppSidebar({
           data-tauri-drag-region
           className="flex h-12 shrink-0 items-center gap-2 px-4"
         >
-          <SidebarTrigger className="-ml-1" />
+          <SidebarTrigger className="-ml-1 ml-20" />
           <Separator
             orientation="vertical"
             className="mr-2 data-[orientation=vertical]:h-4"
           />
-          <div className="flex-1 flex justify-center items-center">
+          <div
+            data-tauri-drag-region
+            className="flex-1 flex justify-center items-center"
+          >
             <div className="w-full max-w-xs">
               <div className="bg-muted rounded px-2 py-1 text-xs text-center text-muted-foreground font-normal tracking-tight select-none">
                 {title}
