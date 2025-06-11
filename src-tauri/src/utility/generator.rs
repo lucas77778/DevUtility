@@ -61,24 +61,25 @@ pub struct HashResult {
 }
 
 #[tauri::command]
-pub fn generate_hashes(input: &str) -> HashResult {
-    let md5 = format!("{:x}", md5::compute(input));
-    let sha1 = format!("{:x}", sha1::Sha1::from(input).digest());
-    let sha224 = format!("{:x}", sha2::Sha224::digest(input.as_bytes()));
-    let sha256 = format!("{:x}", sha2::Sha256::digest(input.as_bytes()));
-    let sha384 = format!("{:x}", sha2::Sha384::digest(input.as_bytes()));
-    let sha512 = format!("{:x}", sha2::Sha512::digest(input.as_bytes()));
-    let sha3_256 = format!("{:x}", sha3::Sha3_256::digest(input.as_bytes()));
-    let keccak256 = format!("{:x}", sha3::Keccak256::digest(input.as_bytes()));
+pub fn generate_hashes(input: &str) {
+// -> HashResult {
+    // let md5 = format!("{:x}", md5::compute(input));
+    // let sha1 = format!("{:x}", sha1::Sha1::from(input).digest());
+    // let sha224 = format!("{:x}", sha2::Sha224::digest(input.as_bytes()));
+    // let sha256 = format!("{:x}", sha2::Sha256::digest(input.as_bytes()));
+    // let sha384 = format!("{:x}", sha2::Sha384::digest(input.as_bytes()));
+    // let sha512 = format!("{:x}", sha2::Sha512::digest(input.as_bytes()));
+    // let sha3_256 = format!("{:x}", sha3::Sha3_256::digest(input.as_bytes()));
+    // let keccak256 = format!("{:x}", sha3::Keccak256::digest(input.as_bytes()));
 
-    HashResult {
-        md5,
-        sha1: "".to_string(),
-        sha224,
-        sha256,
-        sha384,
-        sha512,
-        sha3_256,
-        keccak256,
-    }
+    // HashResult {
+    //     md5,
+    //     sha1: "".to_string(),
+    //     sha224,
+    //     sha256,
+    //     sha384,
+    //     sha512,
+    //     sha3_256,
+    //     keccak256,
+    // }
 }

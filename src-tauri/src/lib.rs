@@ -3,7 +3,7 @@
     windows_subsystem = "windows"
 )]
 
-mod utilities;
+mod utility;
 use tauri::Manager;
 use window_vibrancy::*;
 
@@ -33,12 +33,12 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             greet,
-            utilities::generators::generate_uuid_v4,
-            utilities::generators::generate_uuid_v7,
-            utilities::generators::generate_ulid,
-            utilities::generators::generate_nanoid,
-            utilities::formatters::format_json,
-            utilities::generators::generate_hashes,
+            utility::generator::generate_uuid_v4,
+            utility::generator::generate_uuid_v7,
+            utility::generator::generate_ulid,
+            utility::generator::generate_nanoid,
+            utility::formatter::format_json,
+            utility::generator::generate_hashes,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
