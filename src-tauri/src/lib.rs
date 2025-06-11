@@ -38,6 +38,7 @@ pub fn run() {
             utilities::generators::generate_ulid,
             utilities::generators::generate_nanoid,
             utilities::formatters::format_json,
+            utilities::generators::generate_hashes,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

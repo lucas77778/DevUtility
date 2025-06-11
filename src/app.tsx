@@ -8,6 +8,7 @@ import HtmlEncoderDecoderPage from "./utilities/formatter/html";
 import { CssBeautifyMinifyTool } from "./utilities/formatter/css";
 
 import IdGeneratorPage from "./utilities/generators/id";
+import HashGeneratorPage from "./utilities/generators/hash";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         </Route>
         <Route path="/generators" nest>
           <Route path="id" component={IdGeneratorPage} />
+          <Route path="hash" component={HashGeneratorPage} />
         </Route>
         {/* <Route path="js" component={JsFormatterPage} /> */}
       </AppSidebar>

@@ -24,7 +24,7 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 window-vibrancy = "0.6.0"
 
-# Generators
+# ID Generators
 uuid-simd = "0.8.0"
 uuid = { version = "1.17", features = [
   "v1",
@@ -38,6 +38,15 @@ uuid = { version = "1.17", features = [
 ] }
 ulid = "1.2.1"
 nanoid = "0.4.0"
+
+# Hash Generators
+sha3 = "0.10"
+sha2 = "0.10"
+md5 = "0.7"
+sha1 = "0.10"
+tiny-keccak = { version = "2.0", features = ["sha3"] }
+hex = "0.4"
+rayon = "1.8"
 
 # Formatters
 sonic-rs = "0.5.1"

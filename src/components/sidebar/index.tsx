@@ -72,41 +72,41 @@ const navMain = [
         url: "css",
         icon: FileIcon,
       },
-      {
-        title: "JS Beautify/Minify",
-        url: "js",
-        icon: FileCode2Icon,
-      },
-      {
-        title: "ERB Beautify/Minify",
-        url: "erb",
-        icon: FileTypeIcon,
-      },
-      {
-        title: "LESS Beautify/Minify",
-        url: "less",
-        icon: FileIcon,
-      },
-      {
-        title: "SCSS Beautify/Minify",
-        url: "scss",
-        icon: FileIcon,
-      },
-      {
-        title: "XML Beautify/Minify",
-        url: "xml",
-        icon: FileCodeIcon,
-      },
-      {
-        title: "SQL Formatter",
-        url: "sql",
-        icon: FileIcon,
-      },
-      {
-        title: "Line Sort/Dedupe",
-        url: "lines",
-        icon: ListOrderedIcon,
-      },
+      // {
+      //   title: "JS Beautify/Minify",
+      //   url: "js",
+      //   icon: FileCode2Icon,
+      // },
+      // {
+      //   title: "ERB Beautify/Minify",
+      //   url: "erb",
+      //   icon: FileTypeIcon,
+      // },
+      // {
+      //   title: "LESS Beautify/Minify",
+      //   url: "less",
+      //   icon: FileIcon,
+      // },
+      // {
+      //   title: "SCSS Beautify/Minify",
+      //   url: "scss",
+      //   icon: FileIcon,
+      // },
+      // {
+      //   title: "XML Beautify/Minify",
+      //   url: "xml",
+      //   icon: FileCodeIcon,
+      // },
+      // {
+      //   title: "SQL Formatter",
+      //   url: "sql",
+      //   icon: FileIcon,
+      // },
+      // {
+      //   title: "Line Sort/Dedupe",
+      //   url: "lines",
+      //   icon: ListOrderedIcon,
+      // },
     ],
   },
   {
@@ -118,138 +118,138 @@ const navMain = [
         url: "url-parser",
         icon: LinkIcon,
       },
-      {
-        title: "YAML to JSON",
-        url: "yaml-to-json",
-        icon: FileIcon,
-      },
-      {
-        title: "JSON to YAML",
-        url: "json-to-yaml",
-        icon: FileJsonIcon,
-      },
-      {
-        title: "Number Base Converter",
-        url: "number-base-converter",
-        icon: BinaryIcon,
-      },
-      {
-        title: "JSON to CSV",
-        url: "json-to-csv",
-        icon: TableIcon,
-      },
-      {
-        title: "CSV to JSON",
-        url: "csv-to-json",
-        icon: TableIcon,
-      },
-      {
-        title: "HTML to JSX",
-        url: "html-to-jsx",
-        icon: Code2Icon,
-      },
-      {
-        title: "String Case Converter",
-        url: "string-case-converter",
-        icon: TypeIcon,
-      },
-      {
-        title: "PHP to JSON",
-        url: "php-to-json",
-        icon: FileCodeIcon,
-      },
-      {
-        title: "JSON to PHP",
-        url: "json-to-php",
-        icon: FileJsonIcon,
-      },
-      {
-        title: "PHP Serializer",
-        url: "php-serializer",
-        icon: FileArchiveIcon,
-      },
-      {
-        title: "PHP Unserializer",
-        url: "php-unserializer",
-        icon: FileArchiveIcon,
-      },
-      {
-        title: "SVG to CSS",
-        url: "svg-to-css",
-        icon: FileIcon,
-      },
-      {
-        title: "cURL to Code",
-        url: "curl-to-code",
-        icon: TerminalIcon,
-      },
-      {
-        title: "JSON to Code",
-        url: "json-to-code",
-        icon: CodeIcon,
-      },
-      {
-        title: "Hex to ASCII",
-        url: "hex-to-ascii",
-        icon: HashIcon,
-      },
-      {
-        title: "ASCII to Hex",
-        url: "ascii-to-hex",
-        icon: TextIcon,
-      },
+      // {
+      //   title: "YAML to JSON",
+      //   url: "yaml-to-json",
+      //   icon: FileIcon,
+      // },
+      // {
+      //   title: "JSON to YAML",
+      //   url: "json-to-yaml",
+      //   icon: FileJsonIcon,
+      // },
+      // {
+      //   title: "Number Base Converter",
+      //   url: "number-base-converter",
+      //   icon: BinaryIcon,
+      // },
+      // {
+      //   title: "JSON to CSV",
+      //   url: "json-to-csv",
+      //   icon: TableIcon,
+      // },
+      // {
+      //   title: "CSV to JSON",
+      //   url: "csv-to-json",
+      //   icon: TableIcon,
+      // },
+      // {
+      //   title: "HTML to JSX",
+      //   url: "html-to-jsx",
+      //   icon: Code2Icon,
+      // },
+      // {
+      //   title: "String Case Converter",
+      //   url: "string-case-converter",
+      //   icon: TypeIcon,
+      // },
+      // {
+      //   title: "PHP to JSON",
+      //   url: "php-to-json",
+      //   icon: FileCodeIcon,
+      // },
+      // {
+      //   title: "JSON to PHP",
+      //   url: "json-to-php",
+      //   icon: FileJsonIcon,
+      // },
+      // {
+      //   title: "PHP Serializer",
+      //   url: "php-serializer",
+      //   icon: FileArchiveIcon,
+      // },
+      // {
+      //   title: "PHP Unserializer",
+      //   url: "php-unserializer",
+      //   icon: FileArchiveIcon,
+      // },
+      // {
+      //   title: "SVG to CSS",
+      //   url: "svg-to-css",
+      //   icon: FileIcon,
+      // },
+      // {
+      //   title: "cURL to Code",
+      //   url: "curl-to-code",
+      //   icon: TerminalIcon,
+      // },
+      // {
+      //   title: "JSON to Code",
+      //   url: "json-to-code",
+      //   icon: CodeIcon,
+      // },
+      // {
+      //   title: "Hex to ASCII",
+      //   url: "hex-to-ascii",
+      //   icon: HashIcon,
+      // },
+      // {
+      //   title: "ASCII to Hex",
+      //   url: "ascii-to-hex",
+      //   icon: TextIcon,
+      // },
     ],
   },
-  {
-    title: "Inspect, Preview, Debug",
-    items: [
-      {
-        title: "Unix Time Converter",
-        url: "unix-time-converter",
-        icon: ClockIcon,
-      },
-      {
-        title: "JWT Debugger",
-        url: "jwt-debugger",
-        icon: KeyIcon,
-      },
-      {
-        title: "RegExp Tester",
-        url: "regexp-tester",
-        icon: RegexIcon,
-      },
-      {
-        title: "HTML Preview",
-        url: "html-preview",
-        icon: FileCodeIcon,
-      },
-      {
-        title: "Text Diff Checker",
-        url: "text-diff-checker",
-        icon: DiffIcon,
-      },
-      {
-        title: "String Inspector",
-        url: "string-inspector",
-        icon: SearchIcon,
-      },
-      {
-        title: "Markdown Preview",
-        url: "markdown-preview",
-        icon: FileTextIcon,
-      },
-      {
-        title: "Cron Job Parser",
-        url: "cron-job-parser",
-        icon: CalendarIcon,
-      },
-      {
-        title: "Color Converter",
-        url: "color-converter",
-        icon: PaletteIcon,
-      },
-    ],
-  },
+  // {
+  //   title: "Inspect, Preview, Debug",
+  //   items: [
+  //     {
+  //       title: "Unix Time Converter",
+  //       url: "unix-time-converter",
+  //       icon: ClockIcon,
+  //     },
+  //     {
+  //       title: "JWT Debugger",
+  //       url: "jwt-debugger",
+  //       icon: KeyIcon,
+  //     },
+  //     {
+  //       title: "RegExp Tester",
+  //       url: "regexp-tester",
+  //       icon: RegexIcon,
+  //     },
+  //     {
+  //       title: "HTML Preview",
+  //       url: "html-preview",
+  //       icon: FileCodeIcon,
+  //     },
+  //     {
+  //       title: "Text Diff Checker",
+  //       url: "text-diff-checker",
+  //       icon: DiffIcon,
+  //     },
+  //     {
+  //       title: "String Inspector",
+  //       url: "string-inspector",
+  //       icon: SearchIcon,
+  //     },
+  //     {
+  //       title: "Markdown Preview",
+  //       url: "markdown-preview",
+  //       icon: FileTextIcon,
+  //     },
+  //     {
+  //       title: "Cron Job Parser",
+  //       url: "cron-job-parser",
+  //       icon: CalendarIcon,
+  //     },
+  //     {
+  //       title: "Color Converter",
+  //       url: "color-converter",
+  //       icon: PaletteIcon,
+  //     },
+  //   ],
+  // },
   {
     title: "Generators",
     url: "generators",
@@ -259,63 +259,63 @@ const navMain = [
         url: "id",
         icon: HashIcon,
       },
-      {
-        title: "Lorem Ipsum Generator",
-        url: "lorem-ipsum-generator",
-        icon: TextIcon,
-      },
-      {
-        title: "QR Code Reader/Generator",
-        url: "qr-code-generator",
-        icon: QrCodeIcon,
-      },
+      // {
+      //   title: "Lorem Ipsum Generator",
+      //   url: "lorem-ipsum-generator",
+      //   icon: TextIcon,
+      // },
+      // {
+      //   title: "QR Code Reader/Generator",
+      //   url: "qr-code-generator",
+      //   icon: QrCodeIcon,
+      // },
       {
         title: "Hash Generator",
-        url: "hash-generator",
+        url: "hash",
         icon: HashIcon,
       },
-      {
-        title: "Random String Generator",
-        url: "random-string-generator",
-        icon: TextIcon,
-      },
+      // {
+      //   title: "Random String Generator",
+      //   url: "random-string-generator",
+      //   icon: TextIcon,
+      // },
     ],
   },
-  {
-    title: "Encoder, Decoder",
-    items: [
-      {
-        title: "Base64 String Encode/Decode",
-        url: "base64-string",
-        icon: FileTextIcon,
-      },
-      {
-        title: "Base64 Image Encode/Decode",
-        url: "base64-image",
-        icon: ImageIcon,
-      },
-      {
-        title: "URL Encode/Decode",
-        url: "url-encoder",
-        icon: LinkIcon,
-      },
-      {
-        title: "HTML Entity Encode/Decode",
-        url: "html-entity",
-        icon: FileCodeIcon,
-      },
-      {
-        title: "Backslash Escape/Unescape",
-        url: "backslash-escape",
-        icon: TextIcon,
-      },
-      {
-        title: "Certificate Decoder (X.509)",
-        url: "certificate-decoder",
-        icon: FileTextIcon,
-      },
-    ],
-  },
+  // {
+  //   title: "Encoder, Decoder",
+  //   items: [
+  //     {
+  //       title: "Base64 String Encode/Decode",
+  //       url: "base64-string",
+  //       icon: FileTextIcon,
+  //     },
+  //     {
+  //       title: "Base64 Image Encode/Decode",
+  //       url: "base64-image",
+  //       icon: ImageIcon,
+  //     },
+  //     {
+  //       title: "URL Encode/Decode",
+  //       url: "url-encoder",
+  //       icon: LinkIcon,
+  //     },
+  //     {
+  //       title: "HTML Entity Encode/Decode",
+  //       url: "html-entity",
+  //       icon: FileCodeIcon,
+  //     },
+  //     {
+  //       title: "Backslash Escape/Unescape",
+  //       url: "backslash-escape",
+  //       icon: TextIcon,
+  //     },
+  //     {
+  //       title: "Certificate Decoder (X.509)",
+  //       url: "certificate-decoder",
+  //       icon: FileTextIcon,
+  //     },
+  //   ],
+  // },
 ];
 
 export default function AppSidebar({

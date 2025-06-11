@@ -1,4 +1,8 @@
 use nanoid::nanoid;
+use serde::{Deserialize, Serialize};
+use sha1::{Digest as Sha1Digest, Sha1};
+use sha2::{Digest, Sha224, Sha256, Sha384, Sha512};
+use sha3::{Digest as Sha3Digest, Keccak256};
 use std::time::{SystemTime, UNIX_EPOCH};
 use ulid::Ulid;
 use uuid::{Timestamp, Uuid};
@@ -43,4 +47,40 @@ pub fn generate_nanoid(count: u32) -> String {
         .map(|_| nanoid!())
         .collect::<Vec<String>>()
         .join("\n")
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct HashResult {
+    pub md5: String,
+    pub sha1: String,
+    pub sha224: String,
+    pub sha256: String,
+    pub sha384: String,
+    pub sha512: String,
+    pub sha3_256: String,
+    pub keccak256: String,
+}
+
+#[tauri::command]
+pub fn generate_hashes(input: &str) -> HashResult {
+    let md5 = format!("{:x}", md5::compute(input));
+    // let sha1 = format!("{:x}", sha1::Sha1::from(content).digest());
+    let sha224 = format!("{:x}", sha2::Sha224::digest(input.as_bytes()));
+    let sha256 = format!("{:x}", sha2::Sha256::digest(input.as_bytes()));
+    let sha384 = format!("{:x}", sha2::Sha384::digest(input.as_bytes()));
+    let sha512 = format!("{:x}", sha2::Sha512::digest(input.as_bytes()));
+    let sha3_256 = format!("{:x}", sha3::Sha3_256::digest(input.as_bytes()));
+    let keccak256 = format!("{:x}", sha3::Keccak256::digest(input.as_bytes()));
+
+    HashResult {
+        md5,
+        sha1: "".to_string(),
+        sha224,
+        sha256,
+        sha384,
+        sha512,
+        sha3_256,
+        keccak256,
+    }
 }
