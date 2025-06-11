@@ -252,7 +252,7 @@ const navMain = [
   // },
   {
     title: "Generators",
-    url: "generators",
+    url: "generator",
     items: [
       {
         title: "UUID/ULID Generate/Decode",
@@ -332,7 +332,7 @@ export default function AppSidebar({
   };
 
   return (
-    <SidebarProvider>
+    <SidebarProvider className="bg-transparent">
       <Sidebar {...props}>
         <SidebarHeader data-tauri-drag-region className="pt-12">
           <SearchForm />

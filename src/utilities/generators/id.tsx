@@ -1,4 +1,3 @@
-import { invoke } from "@tauri-apps/api/core";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,6 +33,8 @@ import {
   X,
 } from "lucide-react";
 import { useFastClick } from "foxact/use-fast-click";
+import { InvokeFunction } from "../types";
+import { invoke } from "@/tauri";
 
 const sampleUuid = "f469e069-221e-401e-b495-646a773b055f";
 const sampleRawContents = "f4:69:e0:69:22:1e:40:1e:b4:95:64:6a:77:3b:05:5f";
@@ -104,30 +105,30 @@ export default function IdGeneratorPage() {
     console.log("generateIds", idType, count);
     switch (idType) {
       case IdType.NANOID: {
-        const result = await invoke("generate_nanoid", {
+        const result = await invoke(InvokeFunction.GenerateNanoid, {
           count,
         });
         setGeneratedIds(result);
         break;
       }
       case IdType.ULID: {
-        const result = await invoke("generate_ulid", {
+        const result = await invoke(InvokeFunction.GenerateUlid, {
           count,
         });
         setGeneratedIds(result);
         break;
       }
       case IdType.UUID_V7: {
-        const result = await invoke("generate_uuid_v7", {
+        const result = await invoke(InvokeFunction.GenerateUuidV7, {
           count,
           // timestamp: 0,
         });
         setGeneratedIds(result);
         break;
       }
-      case IdType.UUID_V4: 
+      case IdType.UUID_V4:
       default: {
-        const result = await invoke("generate_uuid_v4", {
+        const result = await invoke(InvokeFunction.GenerateUuidV4, {
           count,
         });
         setGeneratedIds(result);

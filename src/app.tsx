@@ -3,6 +3,7 @@ import "./index.css";
 import { Router, Route } from "wouter";
 
 import AppSidebar from "./components/sidebar";
+
 import JsonFormatterPage from "./utilities/formatter/json";
 import HtmlEncoderDecoderPage from "./utilities/formatter/html";
 import { CssBeautifyMinifyTool } from "./utilities/formatter/css";
@@ -19,11 +20,10 @@ function App() {
           <Route path="html" component={HtmlEncoderDecoderPage} />
           <Route path="css" component={CssBeautifyMinifyTool} />
         </Route>
-        <Route path="/generators" nest>
+        <Route path="/generator" nest>
           <Route path="id" component={IdGeneratorPage} />
           <Route path="hash" component={HashGeneratorPage} />
         </Route>
-        {/* <Route path="js" component={JsFormatterPage} /> */}
       </AppSidebar>
     </Router>
   );
