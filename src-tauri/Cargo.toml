@@ -51,3 +51,9 @@ rayon = "1.8"
 # Formatters
 sonic-rs = "0.5.1"
 tauri-plugin-clipboard-manager = "2"
+
+# Encoders
+base64 = "0.22.1"
+
+# Decoders
+jsonwebtoken = "9.3.1"

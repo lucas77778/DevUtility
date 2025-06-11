@@ -1,8 +1,7 @@
 use nanoid::nanoid;
 use serde::{Deserialize, Serialize};
-use sha1::{Digest as Sha1Digest, Sha1};
-use sha2::{Digest, Sha224, Sha256, Sha384, Sha512};
-use sha3::{Digest as Sha3Digest, Keccak256};
+// use sha1::Digest as Sha1Digest;
+// use sha3::Digest as Sha3Digest;
 use std::time::{SystemTime, UNIX_EPOCH};
 use ulid::Ulid;
 use uuid::{Timestamp, Uuid};
@@ -50,7 +49,6 @@ pub fn generate_nanoid(count: u32) -> String {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
 pub struct HashResult {
     pub md5: String,
     pub sha1: String,
@@ -65,7 +63,7 @@ pub struct HashResult {
 #[tauri::command]
 pub fn generate_hashes(input: &str) -> HashResult {
     let md5 = format!("{:x}", md5::compute(input));
-    // let sha1 = format!("{:x}", sha1::Sha1::from(content).digest());
+    let sha1 = format!("{:x}", sha1::Sha1::from(input).digest());
     let sha224 = format!("{:x}", sha2::Sha224::digest(input.as_bytes()));
     let sha256 = format!("{:x}", sha2::Sha256::digest(input.as_bytes()));
     let sha384 = format!("{:x}", sha2::Sha384::digest(input.as_bytes()));
