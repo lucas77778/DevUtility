@@ -1,7 +1,9 @@
+use digest::Digest;
+use hex;
 use nanoid::nanoid;
+use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
-// use sha1::Digest as Sha1Digest;
-// use sha3::Digest as Sha3Digest;
+use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 use ulid::Ulid;
 use uuid::{Timestamp, Uuid};
@@ -50,6 +52,8 @@ pub fn generate_nanoid(count: u32) -> String {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct HashResult {
+    pub md2: String,
+    pub md4: String,
     pub md5: String,
     pub sha1: String,
     pub sha224: String,
@@ -60,26 +64,82 @@ pub struct HashResult {
     pub keccak256: String,
 }
 
-#[tauri::command]
-pub fn generate_hashes(input: &str) {
-// -> HashResult {
-    // let md5 = format!("{:x}", md5::compute(input));
-    // let sha1 = format!("{:x}", sha1::Sha1::from(input).digest());
-    // let sha224 = format!("{:x}", sha2::Sha224::digest(input.as_bytes()));
-    // let sha256 = format!("{:x}", sha2::Sha256::digest(input.as_bytes()));
-    // let sha384 = format!("{:x}", sha2::Sha384::digest(input.as_bytes()));
-    // let sha512 = format!("{:x}", sha2::Sha512::digest(input.as_bytes()));
-    // let sha3_256 = format!("{:x}", sha3::Sha3_256::digest(input.as_bytes()));
-    // let keccak256 = format!("{:x}", sha3::Keccak256::digest(input.as_bytes()));
+fn hash_with_algorithm<D: Digest>(data: &[u8]) -> String {
+    let mut hasher = D::new();
+    hasher.update(data);
+    hex::encode(hasher.finalize())
+}
 
-    // HashResult {
-    //     md5,
-    //     sha1: "".to_string(),
-    //     sha224,
-    //     sha256,
-    //     sha384,
-    //     sha512,
-    //     sha3_256,
-    //     keccak256,
-    // }
+#[tauri::command]
+pub fn generate_hashes(input: &str) -> HashResult {
+    let data = Arc::new(input.as_bytes().to_vec());
+
+    let tasks: Vec<(&str, Box<dyn Fn(&[u8]) -> String + Send + Sync>)> = vec![
+        (
+            "MD2",
+            Box::new(|data| hash_with_algorithm::<md2::Md2>(data)),
+        ),
+        (
+            "MD5",
+            Box::new(|data| hash_with_algorithm::<md5::Md5>(data)),
+        ),
+        (
+            "MD4",
+            Box::new(|data| hash_with_algorithm::<md4::Md4>(data)),
+        ),
+        (
+            "SHA1",
+            Box::new(|data| hash_with_algorithm::<sha1::Sha1>(data)),
+        ),
+        (
+            "SHA224",
+            Box::new(|data| hash_with_algorithm::<sha2::Sha224>(data)),
+        ),
+        (
+            "SHA256",
+            Box::new(|data| hash_with_algorithm::<sha2::Sha256>(data)),
+        ),
+        (
+            "SHA384",
+            Box::new(|data| hash_with_algorithm::<sha2::Sha384>(data)),
+        ),
+        (
+            "SHA512",
+            Box::new(|data| hash_with_algorithm::<sha2::Sha512>(data)),
+        ),
+        (
+            "SHA3-256",
+            Box::new(|data| hash_with_algorithm::<sha3::Sha3_256>(data)),
+        ),
+        (
+            "Keccak256",
+            Box::new(|data| hash_with_algorithm::<sha3::Keccak256>(data)),
+        ),
+    ];
+
+    let results: Vec<(String, String)> = tasks
+        .into_par_iter()
+        .map(|(name, hasher)| {
+            let hash = hasher(&data);
+            (name.to_string(), hash)
+        })
+        .collect();
+
+    let mut hash_map = std::collections::HashMap::new();
+    for (name, hash) in results {
+        hash_map.insert(name, hash);
+    }
+
+    HashResult {
+        md2: hash_map.get("MD2").unwrap().clone(),
+        md4: hash_map.get("MD4").unwrap().clone(),
+        md5: hash_map.get("MD5").unwrap().clone(),
+        sha1: hash_map.get("SHA1").unwrap().clone(),
+        sha224: hash_map.get("SHA224").unwrap().clone(),
+        sha256: hash_map.get("SHA256").unwrap().clone(),
+        sha384: hash_map.get("SHA384").unwrap().clone(),
+        sha512: hash_map.get("SHA512").unwrap().clone(),
+        sha3_256: hash_map.get("SHA3-256").unwrap().clone(),
+        keccak256: hash_map.get("Keccak256").unwrap().clone(),
+    }
 }
