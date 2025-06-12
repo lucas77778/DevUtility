@@ -50,6 +50,8 @@ import {
 import { SearchForm } from "./search-form";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { useSidebar } from "../ui/sidebar";
+import { cn } from "@/lib/utils";
 
 // This is sample data.
 const navMain = [
@@ -72,11 +74,11 @@ const navMain = [
         url: "css",
         icon: FileIcon,
       },
-      // {
-      //   title: "JS Beautify/Minify",
-      //   url: "js",
-      //   icon: FileCode2Icon,
-      // },
+      {
+        title: "JS Beautify/Minify",
+        url: "js",
+        icon: FileCode2Icon,
+      },
       // {
       //   title: "ERB Beautify/Minify",
       //   url: "erb",
@@ -200,56 +202,56 @@ const navMain = [
       // },
     ],
   },
-  // {
-  //   title: "Inspect, Preview, Debug",
-  //   items: [
-  //     {
-  //       title: "Unix Time Converter",
-  //       url: "unix-time-converter",
-  //       icon: ClockIcon,
-  //     },
-  //     {
-  //       title: "JWT Debugger",
-  //       url: "jwt-debugger",
-  //       icon: KeyIcon,
-  //     },
-  //     {
-  //       title: "RegExp Tester",
-  //       url: "regexp-tester",
-  //       icon: RegexIcon,
-  //     },
-  //     {
-  //       title: "HTML Preview",
-  //       url: "html-preview",
-  //       icon: FileCodeIcon,
-  //     },
-  //     {
-  //       title: "Text Diff Checker",
-  //       url: "text-diff-checker",
-  //       icon: DiffIcon,
-  //     },
-  //     {
-  //       title: "String Inspector",
-  //       url: "string-inspector",
-  //       icon: SearchIcon,
-  //     },
-  //     {
-  //       title: "Markdown Preview",
-  //       url: "markdown-preview",
-  //       icon: FileTextIcon,
-  //     },
-  //     {
-  //       title: "Cron Job Parser",
-  //       url: "cron-job-parser",
-  //       icon: CalendarIcon,
-  //     },
-  //     {
-  //       title: "Color Converter",
-  //       url: "color-converter",
-  //       icon: PaletteIcon,
-  //     },
-  //   ],
-  // },
+  {
+    title: "Inspect, Preview, Debug",
+    items: [
+      {
+        title: "Unix Time Converter",
+        url: "unix-time-converter",
+        icon: ClockIcon,
+      },
+      {
+        title: "JWT Debugger",
+        url: "jwt-debugger",
+        icon: KeyIcon,
+      },
+      {
+        title: "RegExp Tester",
+        url: "regexp-tester",
+        icon: RegexIcon,
+      },
+      {
+        title: "HTML Preview",
+        url: "html-preview",
+        icon: FileCodeIcon,
+      },
+      {
+        title: "Text Diff Checker",
+        url: "text-diff-checker",
+        icon: DiffIcon,
+      },
+      {
+        title: "String Inspector",
+        url: "string-inspector",
+        icon: SearchIcon,
+      },
+      {
+        title: "Markdown Preview",
+        url: "markdown-preview",
+        icon: FileTextIcon,
+      },
+      {
+        title: "Cron Job Parser",
+        url: "cron-job-parser",
+        icon: CalendarIcon,
+      },
+      {
+        title: "Color Converter",
+        url: "color-converter",
+        icon: PaletteIcon,
+      },
+    ],
+  },
   {
     title: "Generators",
     url: "generator",
@@ -259,77 +261,108 @@ const navMain = [
         url: "id",
         icon: HashIcon,
       },
-      // {
-      //   title: "Lorem Ipsum Generator",
-      //   url: "lorem-ipsum-generator",
-      //   icon: TextIcon,
-      // },
-      // {
-      //   title: "QR Code Reader/Generator",
-      //   url: "qr-code-generator",
-      //   icon: QrCodeIcon,
-      // },
+      {
+        title: "Lorem Ipsum Generator",
+        url: "lorem-ipsum-generator",
+        icon: TextIcon,
+      },
+      {
+        title: "QR Code Reader/Generator",
+        url: "qr-code-generator",
+        icon: QrCodeIcon,
+      },
       {
         title: "Hash Generator",
         url: "hash",
         icon: HashIcon,
       },
-      // {
-      //   title: "Random String Generator",
-      //   url: "random-string-generator",
-      //   icon: TextIcon,
-      // },
+      {
+        title: "Random String Generator",
+        url: "random-string-generator",
+        icon: TextIcon,
+      },
     ],
   },
-  // {
-  //   title: "Encoder, Decoder",
-  //   items: [
-  //     {
-  //       title: "Base64 String Encode/Decode",
-  //       url: "base64-string",
-  //       icon: FileTextIcon,
-  //     },
-  //     {
-  //       title: "Base64 Image Encode/Decode",
-  //       url: "base64-image",
-  //       icon: ImageIcon,
-  //     },
-  //     {
-  //       title: "URL Encode/Decode",
-  //       url: "url-encoder",
-  //       icon: LinkIcon,
-  //     },
-  //     {
-  //       title: "HTML Entity Encode/Decode",
-  //       url: "html-entity",
-  //       icon: FileCodeIcon,
-  //     },
-  //     {
-  //       title: "Backslash Escape/Unescape",
-  //       url: "backslash-escape",
-  //       icon: TextIcon,
-  //     },
-  //     {
-  //       title: "Certificate Decoder (X.509)",
-  //       url: "certificate-decoder",
-  //       icon: FileTextIcon,
-  //     },
-  //   ],
-  // },
+  {
+    title: "Encoder, Decoder",
+    items: [
+      {
+        title: "Base64 String Encode/Decode",
+        url: "base64-string",
+        icon: FileTextIcon,
+      },
+      {
+        title: "Base64 Image Encode/Decode",
+        url: "base64-image",
+        icon: ImageIcon,
+      },
+      {
+        title: "URL Encode/Decode",
+        url: "url-encoder",
+        icon: LinkIcon,
+      },
+      {
+        title: "HTML Entity Encode/Decode",
+        url: "html-entity",
+        icon: FileCodeIcon,
+      },
+      {
+        title: "Backslash Escape/Unescape",
+        url: "backslash-escape",
+        icon: TextIcon,
+      },
+      {
+        title: "Certificate Decoder (X.509)",
+        url: "certificate-decoder",
+        icon: FileTextIcon,
+      },
+    ],
+  },
 ];
 
-export default function AppSidebar({
-  children,
-  ...props
-}: React.ComponentProps<typeof Sidebar>) {
-  const [pathname] = useLocation();
-  const [title, setTitle] = useState("Developer Utility");
-  const [isOnTop, setIsOnTop] = useState(false);
+const InsetHeader: React.FC<{ title: string }> = ({ title }) => {
+  const { open } = useSidebar();
 
   const setOnTop = async () => {
     await getCurrentWindow().setAlwaysOnTop(!isOnTop);
     setIsOnTop(!isOnTop);
   };
+  const [isOnTop, setIsOnTop] = useState(false);
+
+  return (
+    <header
+      data-tauri-drag-region
+      className="flex h-12 shrink-0 items-center gap-2 px-4"
+    >
+      <SidebarTrigger className={cn("-ml-1", !open && "ml-16")} />
+      <Separator
+        orientation="vertical"
+        className="mr-2 data-[orientation=vertical]:h-4"
+      />
+      <div
+        data-tauri-drag-region
+        className="flex-1 flex justify-center items-center"
+      >
+        <div className="w-full max-w-xs">
+          <div className="bg-muted rounded px-2 py-1 text-xs text-center text-muted-foreground font-normal tracking-tight select-none">
+            {title}
+          </div>
+        </div>
+      </div>
+
+      <Button variant="ghost" size="icon" className="size-7" onClick={setOnTop}>
+        {isOnTop ? <PinOffIcon /> : <PinIcon />}
+      </Button>
+    </header>
+  );
+};
+
+export default function AppSidebar({
+  children,
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
+  const [title, setTitle] = useState("Developer Utility");
+  const [pathname] = useLocation();
 
   return (
     <SidebarProvider className="bg-transparent">
@@ -337,10 +370,10 @@ export default function AppSidebar({
         <SidebarHeader data-tauri-drag-region className="pt-12">
           <SearchForm />
         </SidebarHeader>
-        <SidebarContent className="scrollbar">
+        <SidebarContent className="-pr-1 mr-1">
           {/* We create a SidebarGroup for each parent. */}
           {navMain.map((category) => (
-            <SidebarGroup key={category.title}>
+            <SidebarGroup key={category.title} >
               <SidebarGroupLabel>{category.title}</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
@@ -368,37 +401,11 @@ export default function AppSidebar({
         </SidebarContent>
         <SidebarRail />
       </Sidebar>
-      <SidebarInset>
-        <header
-          data-tauri-drag-region
-          className="flex h-12 shrink-0 items-center gap-2 px-4"
-        >
-          <SidebarTrigger className="-ml-1 ml-20" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
-          <div
-            data-tauri-drag-region
-            className="flex-1 flex justify-center items-center"
-          >
-            <div className="w-full max-w-xs">
-              <div className="bg-muted rounded px-2 py-1 text-xs text-center text-muted-foreground font-normal tracking-tight select-none">
-                {title}
-              </div>
-            </div>
-          </div>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-7"
-            onClick={setOnTop}
-          >
-            {isOnTop ? <PinOffIcon /> : <PinIcon />}
-          </Button>
-        </header>
-        <main className="flex-1 max-h-[calc(100vh-3rem)]">{children}</main>
+      <SidebarInset className="bg-background rounded-lg m-2">
+        <InsetHeader title={title}  />
+        <main className="@container/main flex-1 max-h-[calc(100vh-3rem)] px-4 pb-2">
+          {children}
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );
