@@ -83,9 +83,10 @@ jobs:
           echo "Certificate imported."
 
       - name: Get Apple API Key
+        env:
+          APPLE_API_KEY_CONTENT: ${{ secrets.APPLE_API_KEY_CONTENT }}
         run: |
-          echo $APPLE_API_KEY_CONTENT | base64 --decode > $HOME/authkey.p8
-          echo "APPLE_API_KEY_PATH=$HOME/authkey.p8" >> $GITHUB_ENV
+          echo $APPLE_API_KEY_CONTENT | base64 --decode > authkey.p8
 
       - name: Build the App
         uses: tauri-apps/tauri-action@v0
@@ -98,9 +99,10 @@ jobs:
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
           APPLE_SIGNING_IDENTITY: ${{ env.CERT_ID }}
 
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
           APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
-          APPLE_API_KEY_PATH: ${{ env.APPLE_API_KEY_PATH }}
+          APPLE_API_KEY_PATH: authkey.p8
         with:
           tagName: ${{ github.ref_name || 'v__VERSION__' }} # This only works if your workflow triggers on new tags.
           releaseName: 'Developer Utility v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
