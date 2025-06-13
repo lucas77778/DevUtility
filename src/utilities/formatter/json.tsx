@@ -33,7 +33,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 // import { InvokeFunction } from "@/tauri";
-import { invoke } from "@/tauri";
+import { utilityInvoke } from "@/utilities/invoke";
 import { IndentStyle, IndentStyleEnum, InvokeFunction } from "../types";
 import { copyToClipboard, readFromClipboard } from "@/lib/copyboard";
 
@@ -84,7 +84,7 @@ export default function JsonFormatterPage() {
   const [sortKeys, setSortKeys] = useState(true);
 
   const handleFormat = async () => {
-    const result = await invoke(InvokeFunction.FormatJson, {
+    const result = await utilityInvoke(InvokeFunction.FormatJson, {
       input: debouncedInputJson,
       style,
     });
@@ -455,7 +455,7 @@ export default function JsonFormatterPage() {
             value={inputJson}
             onChange={(e) => setInputJson(e.target.value)}
             placeholder="Paste your JSON here"
-            className="flex-grow bg-background border-input text-foreground font-mono text-sm resize-none focus:ring-ring focus:border-ring"
+            className="flex-grow border-input text-foreground font-mono text-sm resize-none focus:ring-ring focus:border-ring"
             spellCheck="false"
           />
         </div>
@@ -472,7 +472,7 @@ export default function JsonFormatterPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-8 text-xs bg-background border-input hover:bg-accent text-foreground hover:text-accent-foreground"
+                    className="h-8 text-xs border-input hover:bg-accent text-foreground hover:text-accent-foreground"
                   >
                     {typeof style === "object"
                       ? String(style[IndentStyleEnum.Spaces])
@@ -551,7 +551,7 @@ export default function JsonFormatterPage() {
             value={outputJson}
             readOnly
             placeholder="Formatted JSON will appear here"
-            className="flex-grow bg-background border-input text-foreground font-mono text-sm resize-none focus:ring-ring focus:border-ring"
+            className="flex-grow bg-transparent border-input text-foreground font-mono text-sm resize-none focus:ring-ring focus:border-ring"
             spellCheck="false"
           />
           <div className="flex items-center gap-2 mt-2">

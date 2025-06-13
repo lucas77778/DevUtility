@@ -1,7 +1,9 @@
 import { invoke as invokeCore, InvokeOptions } from "@tauri-apps/api/core";
-import { InvokeFunction, IndentStyle, HashResult } from "./utilities/types";
+import { InvokeFunction, IndentStyle, HashResult } from "./types";
 
-interface InvokeArgs {
+export const IS_TAURI = "__TAURI__" in window;
+
+interface UtilitiesArgs {
   [InvokeFunction.GenerateUlid]: { count: number };
   [InvokeFunction.GenerateNanoid]: { count: number };
   [InvokeFunction.GenerateUuidV4]: { count: number };
@@ -10,7 +12,7 @@ interface InvokeArgs {
   [InvokeFunction.GenerateHashes]: { input: string };
 }
 
-interface InvokeReturns {
+interface UtilitiesReturns {
   [InvokeFunction.GenerateUlid]: string;
   [InvokeFunction.GenerateNanoid]: string;
   [InvokeFunction.GenerateUuidV4]: string;
@@ -19,10 +21,10 @@ interface InvokeReturns {
   [InvokeFunction.GenerateHashes]: HashResult;
 }
 
-export function invoke<T extends InvokeFunction>(
+export function utilityInvoke<T extends InvokeFunction>(
   cmd: T,
-  args: InvokeArgs[T],
+  args: UtilitiesArgs[T],
   options?: InvokeOptions
-): Promise<InvokeReturns[T]> {
+): Promise<UtilitiesReturns[T]> {
   return invokeCore(cmd, args, options);
 }

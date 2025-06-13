@@ -34,7 +34,7 @@ import {
 } from "lucide-react";
 import { useFastClick } from "foxact/use-fast-click";
 import { InvokeFunction } from "../types";
-import { invoke } from "@/tauri";
+import { utilityInvoke } from "@/utilities/invoke";
 
 const sampleUuid = "f469e069-221e-401e-b495-646a773b055f";
 const sampleRawContents = "f4:69:e0:69:22:1e:40:1e:b4:95:64:6a:77:3b:05:5f";
@@ -105,21 +105,21 @@ export default function IdGeneratorPage() {
     console.log("generateIds", idType, count);
     switch (idType) {
       case IdType.NANOID: {
-        const result = await invoke(InvokeFunction.GenerateNanoid, {
+        const result = await utilityInvoke(InvokeFunction.GenerateNanoid, {
           count,
         });
         setGeneratedIds(result);
         break;
       }
       case IdType.ULID: {
-        const result = await invoke(InvokeFunction.GenerateUlid, {
+        const result = await utilityInvoke(InvokeFunction.GenerateUlid, {
           count,
         });
         setGeneratedIds(result);
         break;
       }
       case IdType.UUID_V7: {
-        const result = await invoke(InvokeFunction.GenerateUuidV7, {
+        const result = await utilityInvoke(InvokeFunction.GenerateUuidV7, {
           count,
           // timestamp: 0,
         });
@@ -128,7 +128,7 @@ export default function IdGeneratorPage() {
       }
       case IdType.UUID_V4:
       default: {
-        const result = await invoke(InvokeFunction.GenerateUuidV4, {
+        const result = await utilityInvoke(InvokeFunction.GenerateUuidV4, {
           count,
         });
         setGeneratedIds(result);
@@ -204,7 +204,7 @@ export default function IdGeneratorPage() {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Enter UUID or trigger generation"
-            className="bg-input border-border text-foreground"
+            className="bg-background border-input text-foreground"
           />
 
           <div className="space-y-3 mt-2">
@@ -308,7 +308,7 @@ export default function IdGeneratorPage() {
             value={generatedIds}
             readOnly
             placeholder="Generated IDs will appear here"
-            className="flex-grow bg-input border-border text-foreground font-mono text-sm resize-none"
+            className="flex-grow bg-background border-input text-foreground font-mono text-sm resize-none"
             spellCheck="false"
           />
         </div>

@@ -7,8 +7,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { HashAlgorithm, HashResult, InvokeFunction } from "../types";
-import { invoke } from "@/tauri";
+import { utilityInvoke } from "@/utilities/invoke";
 import { useDebouncedValue } from "foxact/use-debounced-value";
+import { CopyIcon } from "lucide-react";
 
 export default function HashGeneratorPage() {
   const [input, setInput] = useState("");
@@ -18,7 +19,7 @@ export default function HashGeneratorPage() {
   const [lowercased, setLowercased] = useState(false);
 
   const handleGenerateHashes = async () => {
-    const result = await invoke(InvokeFunction.GenerateHashes, {
+    const result = await utilityInvoke(InvokeFunction.GenerateHashes, {
       input: debouncedInput,
     });
     console.log(result);
@@ -83,20 +84,25 @@ export default function HashGeneratorPage() {
         </CardHeader>
         <CardContent className="flex flex-col gap-2">
           {Object.values(HashAlgorithm).map((algo) => (
-            <div key={algo} className="flex items-center gap-2">
+            <div key={algo} className="flex flex-col items-start gap-2">
               <Label
                 htmlFor={`hash-${algo}`}
-                className="w-24 text-xs text-muted-foreground"
+                className="text-xs text-muted-foreground"
               >
                 {algo}:
               </Label>
-              <Input
-                id={`hash-${algo}`}
-                className="flex-1 text-xs"
-                value={hashResult[algo as keyof HashResult] || ""}
-                readOnly
-                placeholder=""
-              />
+              <div className="w-full flex flex-row gap-2">
+                <Input
+                  id={`hash-${algo}`}
+                  className="flex-1 text-xs"
+                  value={hashResult[algo as keyof HashResult] || ""}
+                  readOnly
+                  placeholder=""
+                />
+                <Button size="icon" variant="outline" type="button">
+                  <CopyIcon />
+                </Button>
+              </div>
             </div>
           ))}
         </CardContent>
