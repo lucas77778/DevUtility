@@ -202,56 +202,56 @@ const navMain = [
       // },
     ],
   },
-  {
-    title: "Inspect, Preview, Debug",
-    items: [
-      {
-        title: "Unix Time Converter",
-        url: "unix-time-converter",
-        icon: ClockIcon,
-      },
-      {
-        title: "JWT Debugger",
-        url: "jwt-debugger",
-        icon: KeyIcon,
-      },
-      {
-        title: "RegExp Tester",
-        url: "regexp-tester",
-        icon: RegexIcon,
-      },
-      {
-        title: "HTML Preview",
-        url: "html-preview",
-        icon: FileCodeIcon,
-      },
-      {
-        title: "Text Diff Checker",
-        url: "text-diff-checker",
-        icon: DiffIcon,
-      },
-      {
-        title: "String Inspector",
-        url: "string-inspector",
-        icon: SearchIcon,
-      },
-      {
-        title: "Markdown Preview",
-        url: "markdown-preview",
-        icon: FileTextIcon,
-      },
-      {
-        title: "Cron Job Parser",
-        url: "cron-job-parser",
-        icon: CalendarIcon,
-      },
-      {
-        title: "Color Converter",
-        url: "color-converter",
-        icon: PaletteIcon,
-      },
-    ],
-  },
+  // {
+  //   title: "Inspect, Preview, Debug",
+  //   items: [
+  //     {
+  //       title: "Unix Time Converter",
+  //       url: "unix-time-converter",
+  //       icon: ClockIcon,
+  //     },
+  //     {
+  //       title: "JWT Debugger",
+  //       url: "jwt-debugger",
+  //       icon: KeyIcon,
+  //     },
+  //     {
+  //       title: "RegExp Tester",
+  //       url: "regexp-tester",
+  //       icon: RegexIcon,
+  //     },
+  //     {
+  //       title: "HTML Preview",
+  //       url: "html-preview",
+  //       icon: FileCodeIcon,
+  //     },
+  //     {
+  //       title: "Text Diff Checker",
+  //       url: "text-diff-checker",
+  //       icon: DiffIcon,
+  //     },
+  //     {
+  //       title: "String Inspector",
+  //       url: "string-inspector",
+  //       icon: SearchIcon,
+  //     },
+  //     {
+  //       title: "Markdown Preview",
+  //       url: "markdown-preview",
+  //       icon: FileTextIcon,
+  //     },
+  //     {
+  //       title: "Cron Job Parser",
+  //       url: "cron-job-parser",
+  //       icon: CalendarIcon,
+  //     },
+  //     {
+  //       title: "Color Converter",
+  //       url: "color-converter",
+  //       icon: PaletteIcon,
+  //     },
+  //   ],
+  // },
   {
     title: "Generators",
     url: "generator",
@@ -261,63 +261,63 @@ const navMain = [
         url: "id",
         icon: HashIcon,
       },
-      {
-        title: "Lorem Ipsum Generator",
-        url: "lorem-ipsum-generator",
-        icon: TextIcon,
-      },
-      {
-        title: "QR Code Reader/Generator",
-        url: "qr-code-generator",
-        icon: QrCodeIcon,
-      },
-      {
-        title: "Hash Generator",
-        url: "hash",
-        icon: HashIcon,
-      },
-      {
-        title: "Random String Generator",
-        url: "random-string-generator",
-        icon: TextIcon,
-      },
+      // {
+      //   title: "Lorem Ipsum Generator",
+      //   url: "lorem-ipsum-generator",
+      //   icon: TextIcon,
+      // },
+      // {
+      //   title: "QR Code Reader/Generator",
+      //   url: "qr-code-generator",
+      //   icon: QrCodeIcon,
+      // },
+      // {
+      //   title: "Hash Generator",
+      //   url: "hash",
+      //   icon: HashIcon,
+      // },
+      // {
+      //   title: "Random String Generator",
+      //   url: "random-string-generator",
+      //   icon: TextIcon,
+      // },
     ],
   },
-  {
-    title: "Encoder, Decoder",
-    items: [
-      {
-        title: "Base64 String Encode/Decode",
-        url: "base64-string",
-        icon: FileTextIcon,
-      },
-      {
-        title: "Base64 Image Encode/Decode",
-        url: "base64-image",
-        icon: ImageIcon,
-      },
-      {
-        title: "URL Encode/Decode",
-        url: "url-encoder",
-        icon: LinkIcon,
-      },
-      {
-        title: "HTML Entity Encode/Decode",
-        url: "html-entity",
-        icon: FileCodeIcon,
-      },
-      {
-        title: "Backslash Escape/Unescape",
-        url: "backslash-escape",
-        icon: TextIcon,
-      },
-      {
-        title: "Certificate Decoder (X.509)",
-        url: "certificate-decoder",
-        icon: FileTextIcon,
-      },
-    ],
-  },
+  // {
+  //   title: "Encoder, Decoder",
+  //   items: [
+  //     {
+  //       title: "Base64 String Encode/Decode",
+  //       url: "base64-string",
+  //       icon: FileTextIcon,
+  //     },
+  //     {
+  //       title: "Base64 Image Encode/Decode",
+  //       url: "base64-image",
+  //       icon: ImageIcon,
+  //     },
+  //     {
+  //       title: "URL Encode/Decode",
+  //       url: "url-encoder",
+  //       icon: LinkIcon,
+  //     },
+  //     {
+  //       title: "HTML Entity Encode/Decode",
+  //       url: "html-entity",
+  //       icon: FileCodeIcon,
+  //     },
+  //     {
+  //       title: "Backslash Escape/Unescape",
+  //       url: "backslash-escape",
+  //       icon: TextIcon,
+  //     },
+  //     {
+  //       title: "Certificate Decoder (X.509)",
+  //       url: "certificate-decoder",
+  //       icon: FileTextIcon,
+  //     },
+  //   ],
+  // },
 ];
 
 const InsetHeader: React.FC<{ title: string }> = ({ title }) => {
@@ -374,7 +374,7 @@ export default function AppSidebar({
           {/* We create a SidebarGroup for each parent. */}
           {navMain.map((category) => (
             <SidebarGroup key={category.title} >
-              <SidebarGroupLabel>{category.title}</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-sidebar-foreground">{category.title}</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   {category.items.map((util) => {
@@ -384,7 +384,7 @@ export default function AppSidebar({
                         <SidebarMenuButton asChild isActive={pathname === href}>
                           <Link
                             href={href}
-                            className="flex items-center gap-2 truncate"
+                            className="flex items-center gap-2 truncate text-sidebar-foreground"
                             onClick={() => setTitle(util.title)}
                           >
                             <util.icon className="h-4 w-4" />
