@@ -3,7 +3,7 @@
 
 <h4 align="right"><strong>English</strong> | <a href="./README_CN.md">简体中文</a></h4>
 <p align="center">
-    <img src=./src/icons/logo.svg width=138/>
+    <img src=./src-tauri/icons/icon.png width=128/>
 </p>
 <h1 align="center">Developer Utility</h1>
 <p align="center"><strong>All-in-one Utility Box for Developers</strong></p>
@@ -17,8 +17,6 @@
   <br/> 
   <img src="https://hits.aprilnea.com/hits?url=https://github.com/AprilNEA/DevUtility" />
 </p>
-
-</div>
 
 
 ## Tools
