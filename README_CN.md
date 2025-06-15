@@ -14,3 +14,21 @@
   <br/> 
   <img src="https://hits.aprilnea.com/hits?url=https://github.com/AprilNEA/DevUtility" />
 </p>
+
+## 许可协议
+
+本项目采用双重许可：
+
+### 开源许可证 (GPL-3.0)
+
+- 可免费用于个人或开源项目
+- 必须遵守GPL v3条款
+- 衍生作品必须开源
+- 详见LICENSE-GPL文件
+
+### 商业许可证（付费）
+
+- 用于商业/专有用途
+- 无需开源
+- 包含技术支持
+- 价格咨询请联系admin@aprilnea.com

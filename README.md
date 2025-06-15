@@ -35,3 +35,18 @@
 
 ![Project Status](https://repobeats.axiom.co/api/embed/0529cb5e27377848133ad8196106758f6a908472.svg "Repobeats analytics image")
 
+## Licensing
+
+This project is dual-licensed:
+
+### Open Source License (GPL-3.0)
+- Free to use for personal or open source projects
+- Must comply with GPL v3 terms
+- Derivative works must be open source
+- See LICENSE-GPL for details
+
+### Commercial License (Paid)
+- For commercial/proprietary use
+- No obligation to open source
+- Includes technical support
+- Contact admin@aprilnea.com for pricing

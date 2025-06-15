@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2023-2025, ApriilNEA LLC.
+ *
+ * Dual licensed under:
+ * - GPL-3.0 (open source)
+ * - Commercial license (contact us)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * See LICENSE file for details or contact admin@aprilnea.com
+ */
+
 import * as React from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import {
@@ -283,6 +298,22 @@ const navMain = [
       // },
     ],
   },
+  {
+    title: "Cryptography & Security",
+    url: "cryptography",
+    items: [
+      {
+        title: "RSA Debugger",
+        url: "rsa-debugger",
+        icon: KeyIcon,
+      },
+      {
+        title: "AES Debugger",
+        url: "aes-debugger",
+        icon: KeyIcon,
+      },
+    ],
+  },
   // {
   //   title: "Encoder, Decoder",
   //   items: [
@@ -373,8 +404,10 @@ export default function AppSidebar({
         <SidebarContent className="-pr-1 mr-1">
           {/* We create a SidebarGroup for each parent. */}
           {navMain.map((category) => (
-            <SidebarGroup key={category.title} >
-              <SidebarGroupLabel className="text-sidebar-foreground">{category.title}</SidebarGroupLabel>
+            <SidebarGroup key={category.title}>
+              <SidebarGroupLabel className="text-sidebar-foreground">
+                {category.title}
+              </SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   {category.items.map((util) => {
@@ -402,7 +435,7 @@ export default function AppSidebar({
         <SidebarRail />
       </Sidebar>
       <SidebarInset className="bg-background rounded-lg m-2">
-        <InsetHeader title={title}  />
+        <InsetHeader title={title} />
         <main className="@container/main flex-1 max-h-[calc(100vh-3rem)] px-4 pb-2">
           {children}
         </main>
