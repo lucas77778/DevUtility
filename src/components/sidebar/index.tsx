@@ -343,11 +343,11 @@ const navMain: Nav[] = [
   },
   {
     title: "Encoder, Decoder",
-    url: "codec",
+    slug: "codec",
     items: [
       {
         title: "Base64 Encode/Decode",
-        url: "base64",
+        slug: "base64",
         icon: FileTextIcon,
       },
       //     {
@@ -439,82 +439,90 @@ export default function AppSidebar({
             ? { ...category, items: filteredItems }
             : undefined;
         })
-        .filter((cat): cat is typeof navMain[number] => Boolean(cat))
+        .filter((cat): cat is (typeof navMain)[number] => Boolean(cat))
     : navMain;
 
   return (
     <SidebarProvider className="bg-transparent">
       <Sidebar {...props}>
         <SidebarHeader data-tauri-drag-region className="pt-12">
-          <SearchForm value={search} onChange={(e) => setSearch(e.target.value)} />
+          <SearchForm
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </SidebarHeader>
         <SidebarContent className="-pr-1 mr-1">
           {filteredNav.length === 0 ? (
-            <div className="p-4 text-muted-foreground text-sm">No results found.</div>
+            <div className="p-4 text-muted-foreground text-sm">
+              No results found.
+            </div>
           ) : (
             filteredNav.map((category) => (
               <SidebarGroup key={category.title}>
-              <SidebarGroupLabel className="text-sidebar-foreground">
-                {category.title}
-              </SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {category.items.map((item) => {
-                    if ("subItems" in item) {
-                      return (
-                        <Collapsible
-                          key={item.title}
-                          asChild
-                          // defaultOpen={item.isActive}
-                          className="group/collapsible"
-                        >
-                          <SidebarMenuItem>
-                            <CollapsibleTrigger asChild>
-                              <SidebarMenuButton tooltip={item.title}>
-                                {item.icon && <item.icon />}
-                                <span>{item.title}</span>
-                                <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                              </SidebarMenuButton>
-                            </CollapsibleTrigger>
-                            <CollapsibleContent>
-                              <SidebarMenuSub>
-                                {item.subItems.map((subItem) => (
-                                  <SidebarMenuSubItem key={subItem.title}>
-                                    <SidebarMenuSubButton asChild>
-                                      <Link
-                                        href={`/${category.slug}/${item.slug}/${subItem.slug}`}
-                                      >
-                                        <subItem.icon className="h-4 w-4" />
-                                        <span>{subItem.title}</span>
-                                      </Link>
-                                    </SidebarMenuSubButton>
-                                  </SidebarMenuSubItem>
-                                ))}
-                              </SidebarMenuSub>
-                            </CollapsibleContent>
-                          </SidebarMenuItem>
-                        </Collapsible>
-                      );
-                    }
-                    const href = `/${category.slug}/${item.slug}`;
-                    return (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild isActive={pathname === href}>
-                          <Link
-                            href={href}
-                            className="flex items-center gap-2 truncate text-sidebar-foreground"
-                            onClick={() => setTitle(item.title)}
+                <SidebarGroupLabel className="text-sidebar-foreground">
+                  {category.title}
+                </SidebarGroupLabel>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    {category.items.map((item) => {
+                      if ("subItems" in item) {
+                        return (
+                          <Collapsible
+                            key={item.title}
+                            asChild
+                            // defaultOpen={item.isActive}
+                            className="group/collapsible"
                           >
-                            <item.icon className="h-4 w-4" />
-                            {item.title}
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    );
-                  })}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
+                            <SidebarMenuItem>
+                              <CollapsibleTrigger asChild>
+                                <SidebarMenuButton tooltip={item.title}>
+                                  {item.icon && <item.icon />}
+                                  <span>{item.title}</span>
+                                  <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                                </SidebarMenuButton>
+                              </CollapsibleTrigger>
+                              <CollapsibleContent>
+                                <SidebarMenuSub>
+                                  {item.subItems.map((subItem) => (
+                                    <SidebarMenuSubItem key={subItem.title}>
+                                      <SidebarMenuSubButton asChild>
+                                        <Link
+                                          href={`/${category.slug}/${item.slug}/${subItem.slug}`}
+                                        >
+                                          <subItem.icon className="h-4 w-4" />
+                                          <span>{subItem.title}</span>
+                                        </Link>
+                                      </SidebarMenuSubButton>
+                                    </SidebarMenuSubItem>
+                                  ))}
+                                </SidebarMenuSub>
+                              </CollapsibleContent>
+                            </SidebarMenuItem>
+                          </Collapsible>
+                        );
+                      }
+                      const href = `/${category.slug}/${item.slug}`;
+                      return (
+                        <SidebarMenuItem key={item.title}>
+                          <SidebarMenuButton
+                            asChild
+                            isActive={pathname === href}
+                          >
+                            <Link
+                              href={href}
+                              className="flex items-center gap-2 truncate text-sidebar-foreground"
+                              onClick={() => setTitle(item.title)}
+                            >
+                              <item.icon className="h-4 w-4" />
+                              {item.title}
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      );
+                    })}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
             ))
           )}
         </SidebarContent>
