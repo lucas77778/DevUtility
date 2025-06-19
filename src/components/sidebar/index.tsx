@@ -391,7 +391,7 @@ const InsetHeader: React.FC<{ title: string }> = ({ title }) => {
   return (
     <header
       data-tauri-drag-region
-      className="flex h-12 shrink-0 items-center gap-2 px-4"
+      className="flex h-9 shrink-0 items-center gap-2 px-4"
     >
       <SidebarTrigger className={cn("-ml-1", !open && "ml-16")} />
       <Separator
