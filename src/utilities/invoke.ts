@@ -66,6 +66,7 @@ export function useUtilityInvoke<T extends InvokeFunction>(
 ): SWRMutationResponse<UtilitiesReturns[T], Error, T, UtilitiesArgs[T]> {
   return useSWRMutation<UtilitiesReturns[T], Error, T, UtilitiesArgs[T]>(
     cmd,
+    // @ts-expect-error
     (_, { arg }) => utilityInvoke(cmd, arg),
     options
   );

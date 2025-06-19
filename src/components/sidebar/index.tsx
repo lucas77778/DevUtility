@@ -324,12 +324,12 @@ const navMain: Nav[] = [
     items: [
       {
         title: "RSA Debugger",
-        slug: "rsa-tools",
+        slug: "rsa",
         icon: KeyIcon,
         subItems: [
           {
-            title: "RSA Key Generator",
-            slug: "rsa-key-generator",
+            title: "Generator",
+            slug: "basic-tools",
             icon: KeyIcon,
           },
         ],
