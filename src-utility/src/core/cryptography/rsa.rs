@@ -22,6 +22,7 @@ use rsa::traits::{PrivateKeyParts, PublicKeyParts};
 use rsa::BigUint;
 use rsa::{RsaPrivateKey, RsaPublicKey};
 use serde::{Deserialize, Serialize};
+use sha2::{Digest, Sha256};
 use universal_function_macro::universal_function;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -45,7 +46,7 @@ pub struct RsaKeyAnalysis {
     pub private_params: Option<PrivateKeyParams>,
     pub derived_params: Option<DerivedParams>,
     // pub security_info: SecurityInfo,
-    // pub fingerprint: KeyFingerprint,
+    pub fingerprint: KeyFingerprint,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -102,6 +103,7 @@ pub struct KeyFingerprint {
     pub sha256: String,
     pub sha1: String,
     pub md5: String,
+    pub sha512: String,
 }
 
 #[universal_function]
@@ -199,6 +201,45 @@ fn calculate_rsa_derived_params(priv_key: &RsaPrivateKey) -> DerivedParams {
     }
 }
 
+fn calculate_key_fingerprint(public_key: &RsaPublicKey) -> Result<KeyFingerprint, UtilityError> {
+    // Encode the public key to DER format
+    let der_bytes = public_key
+        .to_public_key_der()
+        .map_err(|e| UtilityError::Runtime(format!("Failed to encode public key to DER: {}", e)))?;
+
+    // Calculate hashes
+    let sha256_hash = {
+        let mut hasher = sha2::Sha256::new();
+        hasher.update(der_bytes.as_bytes());
+        hex::encode(hasher.finalize())
+    };
+
+    let sha1_hash = {
+        let mut hasher = sha1::Sha1::new();
+        hasher.update(der_bytes.as_bytes());
+        hex::encode(hasher.finalize())
+    };
+
+    let md5_hash = {
+        let mut hasher = md5::Md5::new();
+        hasher.update(der_bytes.as_bytes());
+        hex::encode(hasher.finalize())
+    };
+
+    let sha512_hash = {
+        let mut hasher = sha2::Sha512::new();
+        hasher.update(der_bytes.as_bytes());
+        hex::encode(hasher.finalize())
+    };
+
+    Ok(KeyFingerprint {
+        sha256: sha256_hash,
+        sha1: sha1_hash,
+        md5: md5_hash,
+        sha512: sha512_hash,
+    })
+}
+
 #[universal_function]
 pub async fn analyze_rsa_key(key: String) -> Result<RsaKeyAnalysis, UtilityError> {
     // Try to parse as private key first
@@ -209,7 +250,7 @@ pub async fn analyze_rsa_key(key: String) -> Result<RsaKeyAnalysis, UtilityError
 
         let key_size = private_key.size() * 8;
         // let security_info = calculate_security_info(key_size as u32);
-        // let fingerprint = calculate_key_fingerprint(&private_key.to_public_key())?;
+        let fingerprint = calculate_key_fingerprint(&private_key.to_public_key())?;
 
         return Ok(RsaKeyAnalysis {
             key_type: KeyType::Private,
@@ -218,7 +259,7 @@ pub async fn analyze_rsa_key(key: String) -> Result<RsaKeyAnalysis, UtilityError
             private_params,
             derived_params,
             // security_info,
-            // fingerprint,
+            fingerprint,
         });
     }
 
@@ -227,7 +268,7 @@ pub async fn analyze_rsa_key(key: String) -> Result<RsaKeyAnalysis, UtilityError
         let public_params = Some(extract_rsa_public_key_params(&public_key));
         let key_size = public_key.size() * 8;
         // let security_info = calculate_security_info(key_size as u32);
-        // let fingerprint = calculate_key_fingerprint(&public_key)?;
+        let fingerprint = calculate_key_fingerprint(&public_key)?;
 
         return Ok(RsaKeyAnalysis {
             key_type: KeyType::Public,
@@ -236,7 +277,7 @@ pub async fn analyze_rsa_key(key: String) -> Result<RsaKeyAnalysis, UtilityError
             private_params: None,
             derived_params: None,
             // security_info,
-            // fingerprint,
+            fingerprint,
         });
     }
 
