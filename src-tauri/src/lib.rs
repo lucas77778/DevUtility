@@ -16,7 +16,6 @@
     windows_subsystem = "windows"
 )]
 
-mod utility;
 use dev_utility_core;
 use tauri::Manager;
 use window_vibrancy::*;
@@ -50,12 +49,12 @@ pub fn run() {
             dev_utility_core::codec::encode_base64,
             dev_utility_core::cryptography::generate_rsa_key,
             dev_utility_core::cryptography::analyze_rsa_key,
-            utility::generator::generate_uuid_v4,
-            utility::generator::generate_uuid_v7,
-            utility::generator::generate_ulid,
-            utility::generator::generate_nanoid,
-            utility::formatter::format_json,
-            utility::generator::generate_hashes,
+            dev_utility_core::cryptography::generate_hashes,
+            dev_utility_core::generator::generate_uuid_v4,
+            dev_utility_core::generator::generate_uuid_v7,
+            dev_utility_core::generator::generate_ulid,
+            dev_utility_core::generator::generate_nanoid,
+            dev_utility_core::formatter::format_json,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
