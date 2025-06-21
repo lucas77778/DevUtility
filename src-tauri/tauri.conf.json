@@ -6,7 +6,7 @@
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "pnpm build",
+    "beforeBuildCommand": "make prebuild-desktop",
     "frontendDist": "../dist"
   },
   "app": {
@@ -45,7 +45,7 @@
       "icons/icon.ico"
     ],
     "license": "GPL-3.0-or-later OR Commercial",
-    "licenseFile": "../LICENSE",
+    "licenseFile": "../LICENSE.FULL",
     "shortDescription": "⚡ Universal developer toolkit for software, hardware, and security professionals.",
     "longDescription": "⚡ Universal developer toolkit powered by Rust & WebAssembly. Comprehensive tools for software development, hardware engineering, and cybersecurity - delivering native performance across desktop, web, and mobile platforms."
   },

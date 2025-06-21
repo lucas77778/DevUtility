@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "version": "tsx scripts/bump-version.ts",
+    "merge-license": "tsx scripts/merge-license.ts",
     "shadcn": "shadcn",
     "extract": "lingui extract",
     "compile": "lingui compile --typescript",

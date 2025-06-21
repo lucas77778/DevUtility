@@ -11,6 +11,18 @@ pkg: src-utility
 	sed -i '.bak' -e 's/@dev-utility\/dev-utility-core/@dev-utility\/core/g' pkg/package.json
 	rm pkg/package.json.bak
 
+prebuild-desktop:
+	pnpm merge-license
+	pnpm build
+
+build-desktop:
+	pnpm tauri build
+
 license:
 	addlicense -f ./LICENSE . -i .github -i docs
 
+version:
+	pnpm run version
+
+merge-license:
+	pnpm run merge-license
