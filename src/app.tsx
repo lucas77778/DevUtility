@@ -53,7 +53,6 @@ function App() {
             <Route path="analyzer" component={RSAKeyAnalyzerPage} />
           </Route>
         </Route>
-        <LocaleSwitcher />
       </AppSidebar>
     </Router>
   );

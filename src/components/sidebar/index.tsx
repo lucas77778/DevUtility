@@ -79,10 +79,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { LocaleSwitcher } from "./locale-switcher";
 import { msg } from "@lingui/core/macro";
 import { MessageDescriptor } from "@lingui/core";
+import { ThemeSwitcher } from "./theme-switcher";
 
 type NavItem = {
   title: MessageDescriptor;
@@ -432,6 +433,8 @@ export default function AppSidebar({
   children,
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
+  const { _ } = useLingui();
+
   const [title, setTitle] = useState("Developer Utility");
   const [pathname] = useLocation();
   const [search, setSearch] = useState("");
@@ -443,8 +446,8 @@ export default function AppSidebar({
           const filteredItems = category.items.filter((util) => {
             const q = search.toLowerCase();
             return (
-              util.title.toLowerCase().includes(q) ||
-              category.title.toLowerCase().includes(q)
+              util.title.message?.toLowerCase().includes(q) ||
+              category.title.message?.toLowerCase().includes(q)
             );
           });
           return filteredItems.length > 0
@@ -455,7 +458,7 @@ export default function AppSidebar({
     : navMain;
 
   return (
-    <SidebarProvider className="bg-transparent">
+    <SidebarProvider className="bg-transparent dark:bg-sidebar">
       <Sidebar {...props}>
         <SidebarHeader data-tauri-drag-region className="pt-12">
           <SearchForm
@@ -463,80 +466,90 @@ export default function AppSidebar({
             onChange={(e) => setSearch(e.target.value)}
           />
         </SidebarHeader>
-        <SidebarContent className="-pr-1 mr-1">
-          {filteredNav.length === 0 ? (
-            <div className="p-4 text-muted-foreground text-sm">
-              <Trans>No results found.</Trans>
-            </div>
-          ) : (
-            filteredNav.map((category) => (
-              <SidebarGroup key={category.title}>
-                <SidebarGroupLabel className="text-sidebar-foreground">
-                  {category.title}
-                </SidebarGroupLabel>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {category.items.map((item) => {
-                      if ("subItems" in item) {
-                        return (
-                          <Collapsible
-                            key={item.title}
-                            asChild
-                            // defaultOpen={item.isActive}
-                            className="group/collapsible"
-                          >
-                            <SidebarMenuItem>
-                              <CollapsibleTrigger asChild>
-                                <SidebarMenuButton tooltip={item.title}>
-                                  {item.icon && <item.icon />}
-                                  <span>{item.title}</span>
-                                  <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                                </SidebarMenuButton>
-                              </CollapsibleTrigger>
-                              <CollapsibleContent>
-                                <SidebarMenuSub>
-                                  {item.subItems.map((subItem) => (
-                                    <SidebarMenuSubItem key={subItem.title}>
-                                      <SidebarMenuSubButton asChild>
-                                        <Link
-                                          href={`/${category.slug}/${item.slug}/${subItem.slug}`}
-                                        >
-                                          <subItem.icon className="h-4 w-4" />
-                                          <span>{subItem.title}</span>
-                                        </Link>
-                                      </SidebarMenuSubButton>
-                                    </SidebarMenuSubItem>
-                                  ))}
-                                </SidebarMenuSub>
-                              </CollapsibleContent>
-                            </SidebarMenuItem>
-                          </Collapsible>
-                        );
-                      }
-                      const href = `/${category.slug}/${item.slug}`;
-                      return (
-                        <SidebarMenuItem key={item.title}>
-                          <SidebarMenuButton
-                            asChild
-                            isActive={pathname === href}
-                          >
-                            <Link
-                              href={href}
-                              className="flex items-center gap-2 truncate text-sidebar-foreground"
-                              onClick={() => setTitle(item.title)}
+        <SidebarContent className="mb-2">
+          <div className="flex-1 -pr-1 mr-1">
+            {filteredNav.length === 0 ? (
+              <div className="p-4 text-muted-foreground text-sm">
+                <Trans>No results found.</Trans>
+              </div>
+            ) : (
+              filteredNav.map((category) => (
+                <SidebarGroup key={category.slug}>
+                  <SidebarGroupLabel className="text-sidebar-foreground">
+                    {_(category.title)}
+                  </SidebarGroupLabel>
+                  <SidebarGroupContent>
+                    <SidebarMenu>
+                      {category.items.map((item) => {
+                        if ("subItems" in item) {
+                          return (
+                            <Collapsible
+                              key={item.slug}
+                              asChild
+                              // defaultOpen={item.isActive}
+                              className="group/collapsible"
                             >
-                              <item.icon className="h-4 w-4" />
-                              {item.title}
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      );
-                    })}
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </SidebarGroup>
-            ))
-          )}
+                              <SidebarMenuItem>
+                                <CollapsibleTrigger asChild>
+                                  <SidebarMenuButton tooltip={item.title}>
+                                    {item.icon && <item.icon />}
+                                    <span>{_(item.title)}</span>
+                                    <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                                  </SidebarMenuButton>
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <SidebarMenuSub>
+                                    {item.subItems.map((subItem) => (
+                                      <SidebarMenuSubItem key={subItem.slug}>
+                                        <SidebarMenuSubButton asChild>
+                                          <Link
+                                            href={`/${category.slug}/${item.slug}/${subItem.slug}`}
+                                          >
+                                            <subItem.icon className="h-4 w-4" />
+                                            <span>{_(subItem.title)}</span>
+                                          </Link>
+                                        </SidebarMenuSubButton>
+                                      </SidebarMenuSubItem>
+                                    ))}
+                                  </SidebarMenuSub>
+                                </CollapsibleContent>
+                              </SidebarMenuItem>
+                            </Collapsible>
+                          );
+                        }
+                        const href = `/${category.slug}/${item.slug}`;
+                        return (
+                          <SidebarMenuItem key={item.slug}>
+                            <SidebarMenuButton
+                              asChild
+                              isActive={pathname === href}
+                            >
+                              <Link
+                                href={href}
+                                className="flex items-center gap-2 truncate text-sidebar-foreground"
+                                onClick={() => {
+                                  if (item.title.message) {
+                                    setTitle(item.title.message);
+                                  }
+                                }}
+                              >
+                                <item.icon className="h-4 w-4" />
+                                {_(item.title)}
+                              </Link>
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        );
+                      })}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </SidebarGroup>
+              ))
+            )}
+          </div>
+          <div className="flex justify-start px-2">
+            <LocaleSwitcher />
+            <ThemeSwitcher />
+          </div>
         </SidebarContent>
         <SidebarRail />
       </Sidebar>

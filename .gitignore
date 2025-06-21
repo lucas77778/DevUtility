@@ -1,3 +1,6 @@
+# Lingui
+src/locales/**/*.js
+
 # Logs
 logs
 *.log
