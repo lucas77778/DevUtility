@@ -51,7 +51,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDJBRDE1RUM3RUY3NUZGMUYKUldRZi8zWHZ4MTdSS3VGSSs2eFA5OVlPcmhtOUJlaWV3UzY2bGFGNzg2TlNyR3lPc2pucng0SE4K",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEZDQ0I5NzYzMDM3REIzN0MKUldSOHMzMERZNWZML0xKTUdzVkhxVUpUeVdRUFhCemNNQ1hWYytKalFtaHpyaHRBdkFrbkY0ZmkK",
       "endpoints": [
         "https://releases.utility.dev/download/latest/manifest.json"
       ]

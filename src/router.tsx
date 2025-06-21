@@ -27,9 +27,9 @@ import IdGeneratorPage from "./utilities/generators/id";
 import HashGeneratorPage from "./utilities/generators/hash";
 
 import Base64EncoderDecoderPage from "./utilities/codec/base64";
-import RsaBasicToolsPage from "./utilities/cryptography/rsa/generator";
+import RSAKeyGeneratorPage from "./utilities/cryptography/rsa/generator";
 import RSAKeyAnalyzerPage from "./utilities/cryptography/rsa/analyzer";
-import { LocaleSwitcher } from "./components/sidebar/locale-switcher";
+// import RSAKeyConverterPage from "./utilities/cryptography/rsa/converter";
 
 function App() {
   return (
@@ -49,8 +49,9 @@ function App() {
         </Route>
         <Route path="/cryptography" nest>
           <Route path="rsa" nest>
-            <Route path="basic-tools" component={RsaBasicToolsPage} />
+            <Route path="generator" component={RSAKeyGeneratorPage} />
             <Route path="analyzer" component={RSAKeyAnalyzerPage} />
+            {/* <Route path="converter" component={RSAKeyConverterPage} /> */}
           </Route>
         </Route>
       </AppSidebar>
