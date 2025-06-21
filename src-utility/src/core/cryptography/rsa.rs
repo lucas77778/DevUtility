@@ -39,6 +39,7 @@ pub enum KeyType {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct RsaKeyAnalysis {
     pub key_type: KeyType,
     pub key_size: u32,
@@ -50,6 +51,7 @@ pub struct RsaKeyAnalysis {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct PublicKeyParams {
     pub n: String,     // Modulus
     pub e: String,     // Public exponent
@@ -59,6 +61,7 @@ pub struct PublicKeyParams {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct PrivateKeyParams {
     pub n: String,    // Modulus
     pub e: String,    // Public exponent
@@ -80,6 +83,7 @@ pub struct PrivateKeyParams {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct DerivedParams {
     pub phi_n: String,       // Euler's totient φ(n) = (p-1)(q-1)
     pub lambda_n: String,    // Carmichael function λ(n)
@@ -90,6 +94,7 @@ pub struct DerivedParams {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct SecurityInfo {
     pub recommended_minimum_bits: u32,
     pub is_secure: bool,
@@ -99,6 +104,7 @@ pub struct SecurityInfo {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct KeyFingerprint {
     pub sha256: String,
     pub sha1: String,

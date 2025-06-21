@@ -97,7 +97,6 @@ function KeyGenerator() {
 // Key Analyzer Component
 function KeyAnalyzer() {
   const { data, trigger } = useUtilityInvoke(InvokeFunction.AnalyzeRsaKey);
-  const [keyToAnalyze, setKeyToAnalyze] = useState<string>("");
 
   const onAnalyzeKey = async () => {
     await trigger({
