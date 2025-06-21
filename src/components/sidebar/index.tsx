@@ -80,41 +80,44 @@ import {
   CollapsibleTrigger,
 } from "../ui/collapsible";
 import { Trans } from "@lingui/react/macro";
+import { LocaleSwitcher } from "./locale-switcher";
+import { msg } from "@lingui/core/macro";
+import { MessageDescriptor } from "@lingui/core";
 
 type NavItem = {
-  title: string;
+  title: MessageDescriptor;
   slug: string;
   icon: React.ElementType;
 };
 
 type Nav = {
-  title: string;
+  title: MessageDescriptor;
   slug: string;
   items: (NavItem | (NavItem & { subItems: NavItem[] }))[];
 };
 
 const navMain: Nav[] = [
   {
-    title: "Format / Validate / Minify",
+    title: msg`Format / Validate / Minify`,
     slug: "formatter",
     items: [
       {
-        title: "JSON Format/Validate",
+        title: msg`JSON Format/Validate`,
         slug: "json",
         icon: FileJsonIcon,
       },
       {
-        title: "HTML Beautify/Minify",
+        title: msg`HTML Beautify/Minify`,
         slug: "html",
         icon: FileCodeIcon,
       },
       {
-        title: "CSS Beautify/Minify",
+        title: msg`CSS Beautify/Minify`,
         slug: "css",
         icon: FileIcon,
       },
       {
-        title: "JS Beautify/Minify",
+        title: msg`JS Beautify/Minify`,
         slug: "js",
         icon: FileCode2Icon,
       },
@@ -151,11 +154,11 @@ const navMain: Nav[] = [
     ],
   },
   {
-    title: "Data Converter",
+    title: msg`Data Converter`,
     slug: "#",
     items: [
       {
-        title: "URL Parser",
+        title: msg`URL Parser`,
         slug: "url-parser",
         icon: LinkIcon,
       },
@@ -292,11 +295,11 @@ const navMain: Nav[] = [
   //   ],
   // },
   {
-    title: "Generators",
+    title: msg`Generators`,
     slug: "generator",
     items: [
       {
-        title: "UUID/ULID Generate/Decode",
+        title: msg`UUID/ULID Generate/Decode`,
         slug: "id",
         icon: HashIcon,
       },
@@ -323,39 +326,39 @@ const navMain: Nav[] = [
     ],
   },
   {
-    title: "Cryptography & Security",
+    title: msg`Cryptography & Security`,
     slug: "cryptography",
     items: [
       {
-        title: "RSA Debugger",
+        title: msg`RSA Debugger`,
         slug: "rsa",
         icon: KeyIcon,
         subItems: [
           {
-            title: "Key Generator",
-            slug: "basic-tools",
+            title: msg`Key Generator`,
+            slug: "generator",
             icon: RotateCcwKeyIcon,
           },
           {
-            title: "Key Analyzer",
+            title: msg`Key Analyzer`,
             slug: "analyzer",
             icon: RadarIcon,
           },
         ],
       },
       {
-        title: "AES Debugger",
+        title: msg`AES Debugger`,
         slug: "aes-debugger",
         icon: KeyIcon,
       },
     ],
   },
   {
-    title: "Encoder, Decoder",
+    title: msg`Encoder, Decoder`,
     slug: "codec",
     items: [
       {
-        title: "Base64 Encode/Decode",
+        title: msg`Base64 Encode/Decode`,
         slug: "base64",
         icon: FileTextIcon,
       },

@@ -3,23 +3,21 @@ import { I18nProvider as LinguiI18nProvider } from "@lingui/react";
 import { useEffect } from "react";
 
 export const locales = {
-  en: "English",
+  "en-US": "English",
   "zh-CN": "简体中文",
 };
-export const defaultLocale = "en";
+export const defaultLocale = "en-US";
 
 /**
  * We do a dynamic import of just the catalog that we need
  * @param locale any locale string
  */
 export async function dynamicActivate(locale: string) {
-  const { messages } = await import(`./locales/${locale}/messages`);
-  i18n.load(locale, messages);
-  i18n.activate(locale);
+  const { messages } = await import(`./locales/${locale}/messages.po`);
+  i18n.loadAndActivate({ locale, messages });
 }
 
 export const I18nProvider = ({ children }: { children: React.ReactNode }) => {
-  
   useEffect(() => {
     // With this method we dynamically load the catalogs
     dynamicActivate(defaultLocale);
