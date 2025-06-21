@@ -93,52 +93,6 @@ function KeyGenerator() {
     </Card>
   );
 }
-
-// Key Analyzer Component
-function KeyAnalyzer() {
-  const { data, trigger } = useUtilityInvoke(InvokeFunction.AnalyzeRsaKey);
-
-  const onAnalyzeKey = async () => {
-    await trigger({
-      key: keyToAnalyze,
-    });
-  };
-
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>公私钥分解器</CardTitle>
-        <CardDescription>
-          输入PEM格式的公钥或私钥进行分析 (n, e, d, p, q 等参数)。
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <Label htmlFor="publicKeyInputAnalyze">公钥 (PEM) / 私钥 (PEM)</Label>
-        <Textarea
-          id="publicKeyInputAnalyze"
-          placeholder="在此处粘贴公钥"
-          rows={8}
-          value={keyToAnalyze}
-          onChange={(e) => setKeyToAnalyze(e.target.value)}
-        />
-        <Button onClick={onAnalyzeKey}>
-          <Puzzle className="mr-2 h-4 w-4" /> 分析密钥
-        </Button>
-        <div>
-          <Label htmlFor="analysisResult">分析结果</Label>
-          <Textarea
-            id="analysisResult"
-            placeholder="密钥参数将显示在此处"
-            rows={10}
-            readOnly
-            value={JSON.stringify(data, null, 2)}
-          />
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
 // Format Converter Component
 function FormatConverter() {
   return (
@@ -173,10 +127,6 @@ export default function RSABasicToolsPage() {
 
       <TabsContent value="keyGenerator">
         <KeyGenerator />
-      </TabsContent>
-
-      <TabsContent value="keyAnalyzer">
-        <KeyAnalyzer />
       </TabsContent>
 
       <TabsContent value="formatConverter">

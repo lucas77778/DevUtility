@@ -433,7 +433,7 @@ export default function AppSidebar({
   children,
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
-  const { _ } = useLingui();
+  const { t } = useLingui();
 
   const [title, setTitle] = useState("Developer Utility");
   const [pathname] = useLocation();
@@ -476,7 +476,7 @@ export default function AppSidebar({
               filteredNav.map((category) => (
                 <SidebarGroup key={category.slug}>
                   <SidebarGroupLabel className="text-sidebar-foreground">
-                    {_(category.title)}
+                    {t(category.title)}
                   </SidebarGroupLabel>
                   <SidebarGroupContent>
                     <SidebarMenu>
@@ -493,7 +493,7 @@ export default function AppSidebar({
                                 <CollapsibleTrigger asChild>
                                   <SidebarMenuButton tooltip={item.title}>
                                     {item.icon && <item.icon />}
-                                    <span>{_(item.title)}</span>
+                                    <span>{t(item.title)}</span>
                                     <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                                   </SidebarMenuButton>
                                 </CollapsibleTrigger>
@@ -506,7 +506,7 @@ export default function AppSidebar({
                                             href={`/${category.slug}/${item.slug}/${subItem.slug}`}
                                           >
                                             <subItem.icon className="h-4 w-4" />
-                                            <span>{_(subItem.title)}</span>
+                                            <span>{t(subItem.title)}</span>
                                           </Link>
                                         </SidebarMenuSubButton>
                                       </SidebarMenuSubItem>
@@ -534,7 +534,7 @@ export default function AppSidebar({
                                 }}
                               >
                                 <item.icon className="h-4 w-4" />
-                                {_(item.title)}
+                                {t(item.title)}
                               </Link>
                             </SidebarMenuButton>
                           </SidebarMenuItem>

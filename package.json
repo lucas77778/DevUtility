@@ -10,7 +10,7 @@
     "tauri": "tauri",
     "shadcn": "shadcn",
     "extract": "lingui extract",
-    "compile": "lingui compile",
+    "compile": "lingui compile --typescript",
     "crowdin": "crowdin",
     "sync": "crowdin push && crowdin pull",
     "sync:sources": "crowdin push",
