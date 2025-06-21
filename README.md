@@ -14,6 +14,7 @@
   <a href="https://github.com/AprilNEA/DevUtility/pulls"><img src="https://img.shields.io/github/issues-pr/AprilNEA/DevUtility" alt="Pull Requests Badge"/></a>
   <a href="https://github.com/AprilNEA/DevUtility/issues"><img src="https://img.shields.io/github/issues-closed/AprilNEA/DevUtility" alt="Issues Badge"/></a>
   <a href="https://github.com/AprilNEA/DevUtility/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Dual%20License-blue" alt="License Badge"/></a>
+  <a href="https://translate.utility.dev"><img src="https://badges.crowdin.net/devutility/localized.svg" alt="Crowdin Badge"/></a>
   <br/> 
   <img src="https://hits.aprilnea.com/hits?url=https://github.com/AprilNEA/DevUtility" />
 </p>

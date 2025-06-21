@@ -10,7 +10,11 @@
     "tauri": "tauri",
     "shadcn": "shadcn",
     "extract": "lingui extract",
-    "compile": "lingui compile"
+    "compile": "lingui compile",
+    "crowdin": "crowdin",
+    "sync": "crowdin push && crowdin pull",
+    "sync:sources": "crowdin push",
+    "sync:translations": "crowdin pull"
   },
   "dependencies": {
     "@dev-utility/core": "link:pkg",
@@ -48,6 +52,7 @@
     "wouter": "^3.7.1"
   },
   "devDependencies": {
+    "@crowdin/cli": "^4.7.1",
     "@lingui/cli": "^5.3.2",
     "@lingui/swc-plugin": "^5.5.2",
     "@lingui/vite-plugin": "^5.3.2",
