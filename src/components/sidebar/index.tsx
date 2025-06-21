@@ -65,6 +65,9 @@ import {
   PinIcon,
   PinOffIcon,
   ChevronRightIcon,
+  RadarIcon,
+  RotateCcwIcon,
+  RotateCcwKeyIcon,
 } from "lucide-react";
 import { SearchForm } from "./search-form";
 import { useState } from "react";
@@ -76,6 +79,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
+import { Trans } from "@lingui/react/macro";
 
 type NavItem = {
   title: string;
@@ -328,9 +332,14 @@ const navMain: Nav[] = [
         icon: KeyIcon,
         subItems: [
           {
-            title: "Generator",
+            title: "Key Generator",
             slug: "basic-tools",
-            icon: KeyIcon,
+            icon: RotateCcwKeyIcon,
+          },
+          {
+            title: "Key Analyzer",
+            slug: "analyzer",
+            icon: RadarIcon,
           },
         ],
       },
@@ -454,7 +463,7 @@ export default function AppSidebar({
         <SidebarContent className="-pr-1 mr-1">
           {filteredNav.length === 0 ? (
             <div className="p-4 text-muted-foreground text-sm">
-              No results found.
+              <Trans>No results found.</Trans>
             </div>
           ) : (
             filteredNav.map((category) => (

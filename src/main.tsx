@@ -18,11 +18,14 @@ import ReactDOM from "react-dom/client";
 import App from "./app";
 
 import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { I18nProvider } from "./i18n";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <TooltipProvider>
-      <App />
-    </TooltipProvider>
+    <I18nProvider>
+      <TooltipProvider>
+        <App />
+      </TooltipProvider>
+    </I18nProvider>
   </React.StrictMode>
 );
