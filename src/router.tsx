@@ -26,6 +26,11 @@ import { CssBeautifyMinifyTool } from "./utilities/formatter/css";
 import IdGeneratorPage from "./utilities/generators/id";
 import HashGeneratorPage from "./utilities/generators/hash";
 
+import Base64EncoderDecoderPage from "./utilities/codec/base64";
+import RSAKeyGeneratorPage from "./utilities/cryptography/rsa/generator";
+import RSAKeyAnalyzerPage from "./utilities/cryptography/rsa/analyzer";
+// import RSAKeyConverterPage from "./utilities/cryptography/rsa/converter";
+
 function App() {
   return (
     <Router>
@@ -38,6 +43,16 @@ function App() {
         <Route path="/generator" nest>
           <Route path="id" component={IdGeneratorPage} />
           <Route path="hash" component={HashGeneratorPage} />
+        </Route>
+        <Route path="/codec" nest>
+          <Route path="base64" component={Base64EncoderDecoderPage} />
+        </Route>
+        <Route path="/cryptography" nest>
+          <Route path="rsa" nest>
+            <Route path="generator" component={RSAKeyGeneratorPage} />
+            <Route path="analyzer" component={RSAKeyAnalyzerPage} />
+            {/* <Route path="converter" component={RSAKeyConverterPage} /> */}
+          </Route>
         </Route>
       </AppSidebar>
     </Router>

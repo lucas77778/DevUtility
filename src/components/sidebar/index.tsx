@@ -26,6 +26,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
@@ -61,37 +64,62 @@ import {
   ImageIcon,
   PinIcon,
   PinOffIcon,
+  ChevronRightIcon,
+  RadarIcon,
+  RotateCcwIcon,
+  RotateCcwKeyIcon,
 } from "lucide-react";
 import { SearchForm } from "./search-form";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { useSidebar } from "../ui/sidebar";
 import { cn } from "@/lib/utils";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "../ui/collapsible";
+import { Trans, useLingui } from "@lingui/react/macro";
+import { LocaleSwitcher } from "./locale-switcher";
+import { msg } from "@lingui/core/macro";
+import { MessageDescriptor } from "@lingui/core";
+import { ThemeSwitcher } from "./theme-switcher";
 
-// This is sample data.
-const navMain = [
+type NavItem = {
+  title: MessageDescriptor;
+  slug: string;
+  icon: React.ElementType;
+};
+
+type Nav = {
+  title: MessageDescriptor;
+  slug: string;
+  items: (NavItem | (NavItem & { subItems: NavItem[] }))[];
+};
+
+const navMain: Nav[] = [
   {
-    title: "Format / Validate / Minify",
-    url: "formatter",
+    title: msg`Format / Validate / Minify`,
+    slug: "formatter",
     items: [
       {
-        title: "JSON Format/Validate",
-        url: "json",
+        title: msg`JSON Format/Validate`,
+        slug: "json",
         icon: FileJsonIcon,
       },
       {
-        title: "HTML Beautify/Minify",
-        url: "html",
+        title: msg`HTML Beautify/Minify`,
+        slug: "html",
         icon: FileCodeIcon,
       },
       {
-        title: "CSS Beautify/Minify",
-        url: "css",
+        title: msg`CSS Beautify/Minify`,
+        slug: "css",
         icon: FileIcon,
       },
       {
-        title: "JS Beautify/Minify",
-        url: "js",
+        title: msg`JS Beautify/Minify`,
+        slug: "js",
         icon: FileCode2Icon,
       },
       // {
@@ -127,12 +155,12 @@ const navMain = [
     ],
   },
   {
-    title: "Data Converter",
-    url: "#",
+    title: msg`Data Converter`,
+    slug: "#",
     items: [
       {
-        title: "URL Parser",
-        url: "url-parser",
+        title: msg`URL Parser`,
+        slug: "url-parser",
         icon: LinkIcon,
       },
       // {
@@ -268,12 +296,12 @@ const navMain = [
   //   ],
   // },
   {
-    title: "Generators",
-    url: "generator",
+    title: msg`Generators`,
+    slug: "generator",
     items: [
       {
-        title: "UUID/ULID Generate/Decode",
-        url: "id",
+        title: msg`UUID/ULID Generate/Decode`,
+        slug: "id",
         icon: HashIcon,
       },
       // {
@@ -299,56 +327,69 @@ const navMain = [
     ],
   },
   {
-    title: "Cryptography & Security",
-    url: "cryptography",
+    title: msg`Cryptography & Security`,
+    slug: "cryptography",
     items: [
       {
-        title: "RSA Debugger",
-        url: "rsa-debugger",
+        title: msg`RSA Debugger`,
+        slug: "rsa",
         icon: KeyIcon,
+        subItems: [
+          {
+            title: msg`Key Generator`,
+            slug: "generator",
+            icon: RotateCcwKeyIcon,
+          },
+          {
+            title: msg`Key Analyzer`,
+            slug: "analyzer",
+            icon: RadarIcon,
+          },
+        ],
       },
       {
-        title: "AES Debugger",
-        url: "aes-debugger",
+        title: msg`AES Debugger`,
+        slug: "aes-debugger",
         icon: KeyIcon,
       },
     ],
   },
-  // {
-  //   title: "Encoder, Decoder",
-  //   items: [
-  //     {
-  //       title: "Base64 String Encode/Decode",
-  //       url: "base64-string",
-  //       icon: FileTextIcon,
-  //     },
-  //     {
-  //       title: "Base64 Image Encode/Decode",
-  //       url: "base64-image",
-  //       icon: ImageIcon,
-  //     },
-  //     {
-  //       title: "URL Encode/Decode",
-  //       url: "url-encoder",
-  //       icon: LinkIcon,
-  //     },
-  //     {
-  //       title: "HTML Entity Encode/Decode",
-  //       url: "html-entity",
-  //       icon: FileCodeIcon,
-  //     },
-  //     {
-  //       title: "Backslash Escape/Unescape",
-  //       url: "backslash-escape",
-  //       icon: TextIcon,
-  //     },
-  //     {
-  //       title: "Certificate Decoder (X.509)",
-  //       url: "certificate-decoder",
-  //       icon: FileTextIcon,
-  //     },
-  //   ],
-  // },
+  {
+    title: msg`Encoder, Decoder`,
+    slug: "codec",
+    items: [
+      {
+        title: msg`Base64 Encode/Decode`,
+        slug: "base64",
+        icon: FileTextIcon,
+      },
+      //     {
+      //       title: "Base64 Image Encode/Decode",
+      //       url: "base64-image",
+      //       icon: ImageIcon,
+      //     },
+      //     {
+      //       title: "URL Encode/Decode",
+      //       url: "url-encoder",
+      //       icon: LinkIcon,
+      //     },
+      //     {
+      //       title: "HTML Entity Encode/Decode",
+      //       url: "html-entity",
+      //       icon: FileCodeIcon,
+      //     },
+      //     {
+      //       title: "Backslash Escape/Unescape",
+      //       url: "backslash-escape",
+      //       icon: TextIcon,
+      //     },
+      //     {
+      //       title: "Certificate Decoder (X.509)",
+      //       url: "certificate-decoder",
+      //       icon: FileTextIcon,
+      //     },
+    ],
+  },
 ];
 
 const InsetHeader: React.FC<{ title: string }> = ({ title }) => {
@@ -363,7 +404,7 @@ const InsetHeader: React.FC<{ title: string }> = ({ title }) => {
   return (
     <header
       data-tauri-drag-region
-      className="flex h-12 shrink-0 items-center gap-2 px-4"
+      className="flex h-9 shrink-0 items-center gap-2 px-4"
     >
       <SidebarTrigger className={cn("-ml-1", !open && "ml-16")} />
       <Separator
@@ -392,45 +433,123 @@ export default function AppSidebar({
   children,
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
+  const { t } = useLingui();
+
   const [title, setTitle] = useState("Developer Utility");
   const [pathname] = useLocation();
+  const [search, setSearch] = useState("");
+
+  // Filter navMain based on search
+  const filteredNav = search.trim()
+    ? navMain
+        .map((category) => {
+          const filteredItems = category.items.filter((util) => {
+            const q = search.toLowerCase();
+            return (
+              util.title.message?.toLowerCase().includes(q) ||
+              category.title.message?.toLowerCase().includes(q)
+            );
+          });
+          return filteredItems.length > 0
+            ? { ...category, items: filteredItems }
+            : undefined;
+        })
+        .filter((cat): cat is (typeof navMain)[number] => Boolean(cat))
+    : navMain;
 
   return (
-    <SidebarProvider className="bg-transparent">
+    <SidebarProvider className="bg-transparent dark:bg-sidebar">
       <Sidebar {...props}>
         <SidebarHeader data-tauri-drag-region className="pt-12">
-          <SearchForm />
+          <SearchForm
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </SidebarHeader>
-        <SidebarContent className="-pr-1 mr-1">
-          {/* We create a SidebarGroup for each parent. */}
-          {navMain.map((category) => (
-            <SidebarGroup key={category.title}>
-              <SidebarGroupLabel className="text-sidebar-foreground">
-                {category.title}
-              </SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {category.items.map((util) => {
-                    const href = `/${category.url}/${util.url}`;
-                    return (
-                      <SidebarMenuItem key={util.title}>
-                        <SidebarMenuButton asChild isActive={pathname === href}>
-                          <Link
-                            href={href}
-                            className="flex items-center gap-2 truncate text-sidebar-foreground"
-                            onClick={() => setTitle(util.title)}
-                          >
-                            <util.icon className="h-4 w-4" />
-                            {util.title}
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    );
-                  })}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-          ))}
+        <SidebarContent className="mb-2">
+          <div className="flex-1 -pr-1 mr-1">
+            {filteredNav.length === 0 ? (
+              <div className="p-4 text-muted-foreground text-sm">
+                <Trans>No results found.</Trans>
+              </div>
+            ) : (
+              filteredNav.map((category) => (
+                <SidebarGroup key={category.slug}>
+                  <SidebarGroupLabel className="text-sidebar-foreground">
+                    {t(category.title)}
+                  </SidebarGroupLabel>
+                  <SidebarGroupContent>
+                    <SidebarMenu>
+                      {category.items.map((item) => {
+                        if ("subItems" in item) {
+                          return (
+                            <Collapsible
+                              key={item.slug}
+                              asChild
+                              // defaultOpen={item.isActive}
+                              className="group/collapsible"
+                            >
+                              <SidebarMenuItem>
+                                <CollapsibleTrigger asChild>
+                                  <SidebarMenuButton tooltip={item.title}>
+                                    {item.icon && <item.icon />}
+                                    <span>{t(item.title)}</span>
+                                    <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                                  </SidebarMenuButton>
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <SidebarMenuSub>
+                                    {item.subItems.map((subItem) => (
+                                      <SidebarMenuSubItem key={subItem.slug}>
+                                        <SidebarMenuSubButton asChild>
+                                          <Link
+                                            href={`/${category.slug}/${item.slug}/${subItem.slug}`}
+                                          >
+                                            <subItem.icon className="h-4 w-4" />
+                                            <span>{t(subItem.title)}</span>
+                                          </Link>
+                                        </SidebarMenuSubButton>
+                                      </SidebarMenuSubItem>
+                                    ))}
+                                  </SidebarMenuSub>
+                                </CollapsibleContent>
+                              </SidebarMenuItem>
+                            </Collapsible>
+                          );
+                        }
+                        const href = `/${category.slug}/${item.slug}`;
+                        return (
+                          <SidebarMenuItem key={item.slug}>
+                            <SidebarMenuButton
+                              asChild
+                              isActive={pathname === href}
+                            >
+                              <Link
+                                href={href}
+                                className="flex items-center gap-2 truncate text-sidebar-foreground"
+                                onClick={() => {
+                                  if (item.title.message) {
+                                    setTitle(item.title.message);
+                                  }
+                                }}
+                              >
+                                <item.icon className="h-4 w-4" />
+                                {t(item.title)}
+                              </Link>
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        );
+                      })}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </SidebarGroup>
+              ))
+            )}
+          </div>
+          <div className="flex justify-start px-2">
+            <LocaleSwitcher />
+            <ThemeSwitcher />
+          </div>
         </SidebarContent>
         <SidebarRail />
       </Sidebar>

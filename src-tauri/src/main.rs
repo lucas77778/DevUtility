@@ -15,5 +15,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    utility_dev_lib::run()
+    dev_utility_lib::run()
 }

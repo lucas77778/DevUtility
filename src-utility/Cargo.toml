@@ -1,0 +1,74 @@
+[package]
+name = "dev-utility-core"
+version = "0.1.4"
+authors = ["AprilNEA  <github@sku.moe>"]
+description = "⚡ Universal developer toolkit for software, hardware, and security professionals."
+license-file = "../LICENSE"
+repository = "https://github.com/AprilNEA/DevUtility"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = []
+
+web = ["wasm-bindgen"]
+desktop = ["tauri"]
+
+[dependencies]
+universal-function-macro = { path = "../crates/universal-function-macro" }
+
+wasm-bindgen = { version = "0.2.84", optional = true }
+tauri = { workspace = true, optional = true }
+
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = "2.0.10"
+rayon = "1.7"
+
+# Codec
+base64 = "0.22.1"
+jsonwebtoken = "9.3.1"
+
+# Cryptography
+rsa = "0.9.8"
+rand = "0.8"
+pkcs8 = { version = "0.10", features = ["pem"] }
+pkcs1 = { version = "0.7", features = ["pem"] }
+
+num-bigint = { version = "0.4.6", features = ["serde"] }
+num-bigint-dig = { version = "0.8.4", features = ["serde"] }
+num-integer = { version = "0.1.46" }
+
+# Hash
+sha1 = "0.10"
+sha2 = "0.10"
+sha3 = "0.10"
+md2 = "0.10"
+md4 = "0.10"
+md-5 = "0.10"
+digest = "0.10"
+hex = "0.4"
+tiny-keccak = { version = "2.0", features = ["sha3"] }
+
+# ID Generators
+uuid-simd = "0.8.0"
+uuid = { version = "1.17", features = [
+  "v1",
+  "v3",
+  "v4",
+  "v5",
+  "v6",
+  "v7",
+  "v8",
+  "serde",
+] }
+ulid = "1.2.1"
+nanoid = "0.4.0"
+
+# Formatters
+sonic-rs = "0.5.1"
+
+[dev-dependencies]
+wasm-bindgen-test = { version = "0.3.34" }

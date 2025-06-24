@@ -16,20 +16,14 @@
     windows_subsystem = "windows"
 )]
 
-mod utility;
+use dev_utility_core;
 use tauri::Manager;
 use window_vibrancy::*;
-
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_updater::Builder::new().build())
+        // .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_clipboard_manager::init())
         .setup(|app| {
             let window = app.get_webview_window("main").unwrap();
@@ -51,13 +45,16 @@ pub fn run() {
         })
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
-            greet,
-            utility::generator::generate_uuid_v4,
-            utility::generator::generate_uuid_v7,
-            utility::generator::generate_ulid,
-            utility::generator::generate_nanoid,
-            utility::formatter::format_json,
-            utility::generator::generate_hashes,
+            dev_utility_core::codec::decode_base64,
+            dev_utility_core::codec::encode_base64,
+            dev_utility_core::cryptography::generate_rsa_key,
+            dev_utility_core::cryptography::analyze_rsa_key,
+            dev_utility_core::cryptography::generate_hashes,
+            dev_utility_core::generator::generate_uuid_v4,
+            dev_utility_core::generator::generate_uuid_v7,
+            dev_utility_core::generator::generate_ulid,
+            dev_utility_core::generator::generate_nanoid,
+            dev_utility_core::formatter::format_json,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
